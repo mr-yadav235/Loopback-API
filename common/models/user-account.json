@@ -53,7 +53,28 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "user_logs": {
+      "type": "hasMany",
+      "model": "user_log",
+      "foreignKey": "User_account_Id"
+    },
+    "seeker_profiles": {
+      "type": "hasMany",
+      "model": "seeker_profile",
+      "foreignKey": "User_account_Id"
+    },
+    "job_post_activities": {
+      "type": "hasMany",
+      "model": "job_post_activity",
+      "foreignKey": "User_account_Id"
+    },
+    "job_posts": {
+      "type": "hasMany",
+      "model": "job_post",
+      "foreignKey": "User_account_Id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -5,9 +5,26 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "User_log_id": {
+      "type": "string",
+      "id": true
+    },
+    "last_login_date": {
+      "type": "date"
+    },
+    "last_job_apply_date": {
+      "type": "date"
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "user_account": {
+      "type": "hasOne",
+      "model": "user_account",
+      "foreignKey": "User_log_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }
