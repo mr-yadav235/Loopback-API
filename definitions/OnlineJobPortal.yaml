@@ -1,36 +1,6076 @@
+paths:
+  '/user_types/{id}/user_accounts/{fk}':
+    get:
+      tags:
+        - user_type
+      summary: Find a related item by id for user_accounts.
+      operationId: user_type.prototype.__findById__user_accounts
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for user_accounts
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    delete:
+      tags:
+        - user_type
+      summary: Delete a related item by id for user_accounts.
+      operationId: user_type.prototype.__destroyById__user_accounts
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for user_accounts
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - user_type
+      summary: Update a related item by id for user_accounts.
+      operationId: user_type.prototype.__updateById__user_accounts
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for user_accounts
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/user_account'
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  '/user_types/{id}/user_accounts':
+    get:
+      tags:
+        - user_type
+      summary: Queries user_accounts of user_type.
+      operationId: user_type.prototype.__get__user_accounts
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user_account'
+      deprecated: false
+    post:
+      tags:
+        - user_type
+      summary: Creates a new instance in user_accounts of this model.
+      operationId: user_type.prototype.__create__user_accounts
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/user_account'
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    delete:
+      tags:
+        - user_type
+      summary: Deletes all user_accounts of this model.
+      operationId: user_type.prototype.__delete__user_accounts
+      parameters:
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/user_types/{id}/user_accounts/count':
+    get:
+      tags:
+        - user_type
+      summary: Counts user_accounts of user_type.
+      operationId: user_type.prototype.__count__user_accounts
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /user_types:
+    post:
+      tags:
+        - user_type
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: user_type.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+    patch:
+      tags:
+        - user_type
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: user_type.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+    put:
+      tags:
+        - user_type
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_type.replaceOrCreate__put_user_types
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+    get:
+      tags:
+        - user_type
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: user_type.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user_type'
+      deprecated: false
+  /user_types/replaceOrCreate:
+    post:
+      tags:
+        - user_type
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_type.replaceOrCreate__post_user_types_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+  /user_types/upsertWithWhere:
+    post:
+      tags:
+        - user_type
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: user_type.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+  '/user_types/{id}/exists':
+    get:
+      tags:
+        - user_type
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_type.exists__get_user_types_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/user_types/{id}':
+    head:
+      tags:
+        - user_type
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_type.exists__head_user_types_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - user_type
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: user_type.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+    put:
+      tags:
+        - user_type
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_type.replaceById__put_user_types_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+    delete:
+      tags:
+        - user_type
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: user_type.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - user_type
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: user_type.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_type'
+        - name: id
+          in: path
+          description: user_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+  '/user_types/{id}/replace':
+    post:
+      tags:
+        - user_type
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_type.replaceById__post_user_types_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+  /user_types/findOne:
+    get:
+      tags:
+        - user_type
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: user_type.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_type'
+      deprecated: false
+  /user_types/update:
+    post:
+      tags:
+        - user_type
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: user_type.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /user_types/count:
+    get:
+      tags:
+        - user_type
+      summary: Count instances of the model matched by where from the data source.
+      operationId: user_type.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /user_accounts:
+    post:
+      tags:
+        - user_account
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: user_account.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    patch:
+      tags:
+        - user_account
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: user_account.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    put:
+      tags:
+        - user_account
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_account.replaceOrCreate__put_user_accounts
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    get:
+      tags:
+        - user_account
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: user_account.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user_account'
+      deprecated: false
+  /user_accounts/replaceOrCreate:
+    post:
+      tags:
+        - user_account
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_account.replaceOrCreate__post_user_accounts_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  /user_accounts/upsertWithWhere:
+    post:
+      tags:
+        - user_account
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: user_account.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  '/user_accounts/{id}/exists':
+    get:
+      tags:
+        - user_account
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_account.exists__get_user_accounts_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/user_accounts/{id}':
+    head:
+      tags:
+        - user_account
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_account.exists__head_user_accounts_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - user_account
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: user_account.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    put:
+      tags:
+        - user_account
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_account.replaceById__put_user_accounts_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+    delete:
+      tags:
+        - user_account
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: user_account.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - user_account
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: user_account.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_account'
+        - name: id
+          in: path
+          description: user_account id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  '/user_accounts/{id}/replace':
+    post:
+      tags:
+        - user_account
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_account.replaceById__post_user_accounts_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  /user_accounts/findOne:
+    get:
+      tags:
+        - user_account
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: user_account.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_account'
+      deprecated: false
+  /user_accounts/update:
+    post:
+      tags:
+        - user_account
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: user_account.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_account'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /user_accounts/count:
+    get:
+      tags:
+        - user_account
+      summary: Count instances of the model matched by where from the data source.
+      operationId: user_account.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /user_logs:
+    post:
+      tags:
+        - user_log
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: user_log.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+    patch:
+      tags:
+        - user_log
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: user_log.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+    put:
+      tags:
+        - user_log
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_log.replaceOrCreate__put_user_logs
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+    get:
+      tags:
+        - user_log
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: user_log.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user_log'
+      deprecated: false
+  /user_logs/replaceOrCreate:
+    post:
+      tags:
+        - user_log
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: user_log.replaceOrCreate__post_user_logs_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+  /user_logs/upsertWithWhere:
+    post:
+      tags:
+        - user_log
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: user_log.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+  '/user_logs/{id}/exists':
+    get:
+      tags:
+        - user_log
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_log.exists__get_user_logs_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/user_logs/{id}':
+    head:
+      tags:
+        - user_log
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'user_log.exists__head_user_logs_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - user_log
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: user_log.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+    put:
+      tags:
+        - user_log
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_log.replaceById__put_user_logs_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+    delete:
+      tags:
+        - user_log
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: user_log.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - user_log
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: user_log.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_log'
+        - name: id
+          in: path
+          description: user_log id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+  '/user_logs/{id}/replace':
+    post:
+      tags:
+        - user_log
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'user_log.replaceById__post_user_logs_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+  /user_logs/findOne:
+    get:
+      tags:
+        - user_log
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: user_log.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user_log'
+      deprecated: false
+  /user_logs/update:
+    post:
+      tags:
+        - user_log
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: user_log.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/user_log'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /user_logs/count:
+    get:
+      tags:
+        - user_log
+      summary: Count instances of the model matched by where from the data source.
+      operationId: user_log.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /business_streams:
+    post:
+      tags:
+        - business_stream
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: business_stream.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+    patch:
+      tags:
+        - business_stream
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: business_stream.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+    put:
+      tags:
+        - business_stream
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: business_stream.replaceOrCreate__put_business_streams
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+    get:
+      tags:
+        - business_stream
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: business_stream.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/business_stream'
+      deprecated: false
+  /business_streams/replaceOrCreate:
+    post:
+      tags:
+        - business_stream
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: business_stream.replaceOrCreate__post_business_streams_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+  /business_streams/upsertWithWhere:
+    post:
+      tags:
+        - business_stream
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: business_stream.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+  '/business_streams/{id}/exists':
+    get:
+      tags:
+        - business_stream
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'business_stream.exists__get_business_streams_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/business_streams/{id}':
+    head:
+      tags:
+        - business_stream
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'business_stream.exists__head_business_streams_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - business_stream
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: business_stream.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+    put:
+      tags:
+        - business_stream
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'business_stream.replaceById__put_business_streams_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+    delete:
+      tags:
+        - business_stream
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: business_stream.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - business_stream
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: business_stream.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/business_stream'
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+  '/business_streams/{id}/replace':
+    post:
+      tags:
+        - business_stream
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'business_stream.replaceById__post_business_streams_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+  /business_streams/findOne:
+    get:
+      tags:
+        - business_stream
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: business_stream.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/business_stream'
+      deprecated: false
+  /business_streams/update:
+    post:
+      tags:
+        - business_stream
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: business_stream.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/business_stream'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /business_streams/count:
+    get:
+      tags:
+        - business_stream
+      summary: Count instances of the model matched by where from the data source.
+      operationId: business_stream.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /companies:
+    post:
+      tags:
+        - company
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: company.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    patch:
+      tags:
+        - company
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: company.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    put:
+      tags:
+        - company
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: company.replaceOrCreate__put_companies
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    get:
+      tags:
+        - company
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: company.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/company'
+      deprecated: false
+  /companies/replaceOrCreate:
+    post:
+      tags:
+        - company
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: company.replaceOrCreate__post_companies_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  /companies/upsertWithWhere:
+    post:
+      tags:
+        - company
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: company.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  '/companies/{id}/exists':
+    get:
+      tags:
+        - company
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'company.exists__get_companies_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/companies/{id}':
+    head:
+      tags:
+        - company
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'company.exists__head_companies_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - company
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: company.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    put:
+      tags:
+        - company
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'company.replaceById__put_companies_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    delete:
+      tags:
+        - company
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: company.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - company
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: company.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company'
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  '/companies/{id}/replace':
+    post:
+      tags:
+        - company
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'company.replaceById__post_companies_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  /companies/findOne:
+    get:
+      tags:
+        - company
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: company.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  /companies/update:
+    post:
+      tags:
+        - company
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: company.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /companies/count:
+    get:
+      tags:
+        - company
+      summary: Count instances of the model matched by where from the data source.
+      operationId: company.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /company_images:
+    post:
+      tags:
+        - company_image
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: company_image.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    patch:
+      tags:
+        - company_image
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: company_image.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    put:
+      tags:
+        - company_image
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: company_image.replaceOrCreate__put_company_images
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    get:
+      tags:
+        - company_image
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: company_image.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/company_image'
+      deprecated: false
+  /company_images/replaceOrCreate:
+    post:
+      tags:
+        - company_image
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: company_image.replaceOrCreate__post_company_images_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  /company_images/upsertWithWhere:
+    post:
+      tags:
+        - company_image
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: company_image.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  '/company_images/{id}/exists':
+    get:
+      tags:
+        - company_image
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'company_image.exists__get_company_images_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/company_images/{id}':
+    head:
+      tags:
+        - company_image
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'company_image.exists__head_company_images_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - company_image
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: company_image.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    put:
+      tags:
+        - company_image
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'company_image.replaceById__put_company_images_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    delete:
+      tags:
+        - company_image
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: company_image.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - company_image
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: company_image.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company_image'
+        - name: id
+          in: path
+          description: company_image id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  '/company_images/{id}/replace':
+    post:
+      tags:
+        - company_image
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'company_image.replaceById__post_company_images_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  /company_images/findOne:
+    get:
+      tags:
+        - company_image
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: company_image.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  /company_images/update:
+    post:
+      tags:
+        - company_image
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: company_image.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/company_image'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /company_images/count:
+    get:
+      tags:
+        - company_image
+      summary: Count instances of the model matched by where from the data source.
+      operationId: company_image.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /education_details:
+    post:
+      tags:
+        - education_detail
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: education_detail.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    patch:
+      tags:
+        - education_detail
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: education_detail.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    put:
+      tags:
+        - education_detail
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: education_detail.replaceOrCreate__put_education_details
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    get:
+      tags:
+        - education_detail
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: education_detail.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/education_detail'
+      deprecated: false
+  /education_details/replaceOrCreate:
+    post:
+      tags:
+        - education_detail
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: education_detail.replaceOrCreate__post_education_details_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  /education_details/upsertWithWhere:
+    post:
+      tags:
+        - education_detail
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: education_detail.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  '/education_details/{id}/exists':
+    get:
+      tags:
+        - education_detail
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'education_detail.exists__get_education_details_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/education_details/{id}':
+    head:
+      tags:
+        - education_detail
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'education_detail.exists__head_education_details_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - education_detail
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: education_detail.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    put:
+      tags:
+        - education_detail
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'education_detail.replaceById__put_education_details_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    delete:
+      tags:
+        - education_detail
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: education_detail.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - education_detail
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: education_detail.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/education_detail'
+        - name: id
+          in: path
+          description: education_detail id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  '/education_details/{id}/replace':
+    post:
+      tags:
+        - education_detail
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'education_detail.replaceById__post_education_details_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  /education_details/findOne:
+    get:
+      tags:
+        - education_detail
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: education_detail.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  /education_details/update:
+    post:
+      tags:
+        - education_detail
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: education_detail.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/education_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /education_details/count:
+    get:
+      tags:
+        - education_detail
+      summary: Count instances of the model matched by where from the data source.
+      operationId: education_detail.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /experience_details:
+    post:
+      tags:
+        - experience_detail
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: experience_detail.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    patch:
+      tags:
+        - experience_detail
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: experience_detail.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    put:
+      tags:
+        - experience_detail
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: experience_detail.replaceOrCreate__put_experience_details
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    get:
+      tags:
+        - experience_detail
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: experience_detail.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/experience_detail'
+      deprecated: false
+  /experience_details/replaceOrCreate:
+    post:
+      tags:
+        - experience_detail
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: experience_detail.replaceOrCreate__post_experience_details_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  /experience_details/upsertWithWhere:
+    post:
+      tags:
+        - experience_detail
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: experience_detail.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  '/experience_details/{id}/exists':
+    get:
+      tags:
+        - experience_detail
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'experience_detail.exists__get_experience_details_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/experience_details/{id}':
+    head:
+      tags:
+        - experience_detail
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'experience_detail.exists__head_experience_details_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - experience_detail
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: experience_detail.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    put:
+      tags:
+        - experience_detail
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'experience_detail.replaceById__put_experience_details_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    delete:
+      tags:
+        - experience_detail
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: experience_detail.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - experience_detail
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: experience_detail.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/experience_detail'
+        - name: id
+          in: path
+          description: experience_detail id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  '/experience_details/{id}/replace':
+    post:
+      tags:
+        - experience_detail
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'experience_detail.replaceById__post_experience_details_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  /experience_details/findOne:
+    get:
+      tags:
+        - experience_detail
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: experience_detail.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  /experience_details/update:
+    post:
+      tags:
+        - experience_detail
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: experience_detail.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/experience_detail'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /experience_details/count:
+    get:
+      tags:
+        - experience_detail
+      summary: Count instances of the model matched by where from the data source.
+      operationId: experience_detail.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /seeker_profiles:
+    post:
+      tags:
+        - seeker_profile
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: seeker_profile.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+    patch:
+      tags:
+        - seeker_profile
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: seeker_profile.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+    put:
+      tags:
+        - seeker_profile
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: seeker_profile.replaceOrCreate__put_seeker_profiles
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+    get:
+      tags:
+        - seeker_profile
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: seeker_profile.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  /seeker_profiles/replaceOrCreate:
+    post:
+      tags:
+        - seeker_profile
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: seeker_profile.replaceOrCreate__post_seeker_profiles_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  /seeker_profiles/upsertWithWhere:
+    post:
+      tags:
+        - seeker_profile
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: seeker_profile.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  '/seeker_profiles/{id}/exists':
+    get:
+      tags:
+        - seeker_profile
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'seeker_profile.exists__get_seeker_profiles_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/seeker_profiles/{id}':
+    head:
+      tags:
+        - seeker_profile
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'seeker_profile.exists__head_seeker_profiles_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - seeker_profile
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: seeker_profile.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+    put:
+      tags:
+        - seeker_profile
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'seeker_profile.replaceById__put_seeker_profiles_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: seeker_profile.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - seeker_profile
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: seeker_profile.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_profile'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  '/seeker_profiles/{id}/replace':
+    post:
+      tags:
+        - seeker_profile
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'seeker_profile.replaceById__post_seeker_profiles_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  /seeker_profiles/findOne:
+    get:
+      tags:
+        - seeker_profile
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: seeker_profile.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_profile'
+      deprecated: false
+  /seeker_profiles/update:
+    post:
+      tags:
+        - seeker_profile
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: seeker_profile.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_profile'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /seeker_profiles/count:
+    get:
+      tags:
+        - seeker_profile
+      summary: Count instances of the model matched by where from the data source.
+      operationId: seeker_profile.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /seeker_skill_sets:
+    post:
+      tags:
+        - seeker_skill_set
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: seeker_skill_set.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    patch:
+      tags:
+        - seeker_skill_set
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: seeker_skill_set.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    put:
+      tags:
+        - seeker_skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: seeker_skill_set.replaceOrCreate__put_seeker_skill_sets
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    get:
+      tags:
+        - seeker_skill_set
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: seeker_skill_set.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  /seeker_skill_sets/replaceOrCreate:
+    post:
+      tags:
+        - seeker_skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: seeker_skill_set.replaceOrCreate__post_seeker_skill_sets_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  /seeker_skill_sets/upsertWithWhere:
+    post:
+      tags:
+        - seeker_skill_set
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: seeker_skill_set.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  '/seeker_skill_sets/{id}/exists':
+    get:
+      tags:
+        - seeker_skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'seeker_skill_set.exists__get_seeker_skill_sets_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/seeker_skill_sets/{id}':
+    head:
+      tags:
+        - seeker_skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'seeker_skill_set.exists__head_seeker_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - seeker_skill_set
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: seeker_skill_set.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    put:
+      tags:
+        - seeker_skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'seeker_skill_set.replaceById__put_seeker_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_skill_set
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: seeker_skill_set.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - seeker_skill_set
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: seeker_skill_set.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_skill_set'
+        - name: id
+          in: path
+          description: seeker_skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  '/seeker_skill_sets/{id}/replace':
+    post:
+      tags:
+        - seeker_skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'seeker_skill_set.replaceById__post_seeker_skill_sets_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  /seeker_skill_sets/findOne:
+    get:
+      tags:
+        - seeker_skill_set
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: seeker_skill_set.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  /seeker_skill_sets/update:
+    post:
+      tags:
+        - seeker_skill_set
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: seeker_skill_set.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/seeker_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /seeker_skill_sets/count:
+    get:
+      tags:
+        - seeker_skill_set
+      summary: Count instances of the model matched by where from the data source.
+      operationId: seeker_skill_set.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /skill_sets:
+    post:
+      tags:
+        - skill_set
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: skill_set.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+    patch:
+      tags:
+        - skill_set
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: skill_set.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+    put:
+      tags:
+        - skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: skill_set.replaceOrCreate__put_skill_sets
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+    get:
+      tags:
+        - skill_set
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: skill_set.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/skill_set'
+      deprecated: false
+  /skill_sets/replaceOrCreate:
+    post:
+      tags:
+        - skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: skill_set.replaceOrCreate__post_skill_sets_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+  /skill_sets/upsertWithWhere:
+    post:
+      tags:
+        - skill_set
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: skill_set.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+  '/skill_sets/{id}/exists':
+    get:
+      tags:
+        - skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'skill_set.exists__get_skill_sets_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/skill_sets/{id}':
+    head:
+      tags:
+        - skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'skill_set.exists__head_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - skill_set
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: skill_set.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+    put:
+      tags:
+        - skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'skill_set.replaceById__put_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - skill_set
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: skill_set.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - skill_set
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: skill_set.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/skill_set'
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+  '/skill_sets/{id}/replace':
+    post:
+      tags:
+        - skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'skill_set.replaceById__post_skill_sets_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+  /skill_sets/findOne:
+    get:
+      tags:
+        - skill_set
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: skill_set.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/skill_set'
+      deprecated: false
+  /skill_sets/update:
+    post:
+      tags:
+        - skill_set
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: skill_set.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /skill_sets/count:
+    get:
+      tags:
+        - skill_set
+      summary: Count instances of the model matched by where from the data source.
+      operationId: skill_set.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /job_post_activities:
+    post:
+      tags:
+        - job_post_activity
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: job_post_activity.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+    patch:
+      tags:
+        - job_post_activity
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: job_post_activity.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+    put:
+      tags:
+        - job_post_activity
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_activity.replaceOrCreate__put_job_post_activities
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+    get:
+      tags:
+        - job_post_activity
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: job_post_activity.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  /job_post_activities/replaceOrCreate:
+    post:
+      tags:
+        - job_post_activity
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_activity.replaceOrCreate__post_job_post_activities_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  /job_post_activities/upsertWithWhere:
+    post:
+      tags:
+        - job_post_activity
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: job_post_activity.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  '/job_post_activities/{id}/exists':
+    get:
+      tags:
+        - job_post_activity
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post_activity.exists__get_job_post_activities_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/job_post_activities/{id}':
+    head:
+      tags:
+        - job_post_activity
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post_activity.exists__head_job_post_activities_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - job_post_activity
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: job_post_activity.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+    put:
+      tags:
+        - job_post_activity
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post_activity.replaceById__put_job_post_activities_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+    delete:
+      tags:
+        - job_post_activity
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: job_post_activity.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - job_post_activity
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: job_post_activity.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_activity'
+        - name: id
+          in: path
+          description: job_post_activity id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  '/job_post_activities/{id}/replace':
+    post:
+      tags:
+        - job_post_activity
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post_activity.replaceById__post_job_post_activities_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  /job_post_activities/findOne:
+    get:
+      tags:
+        - job_post_activity
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: job_post_activity.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_activity'
+      deprecated: false
+  /job_post_activities/update:
+    post:
+      tags:
+        - job_post_activity
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: job_post_activity.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_activity'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /job_post_activities/count:
+    get:
+      tags:
+        - job_post_activity
+      summary: Count instances of the model matched by where from the data source.
+      operationId: job_post_activity.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /job_posts:
+    post:
+      tags:
+        - job_post
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: job_post.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+    patch:
+      tags:
+        - job_post
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: job_post.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+    put:
+      tags:
+        - job_post
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post.replaceOrCreate__put_job_posts
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+    get:
+      tags:
+        - job_post
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: job_post.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_post'
+      deprecated: false
+  /job_posts/replaceOrCreate:
+    post:
+      tags:
+        - job_post
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post.replaceOrCreate__post_job_posts_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+  /job_posts/upsertWithWhere:
+    post:
+      tags:
+        - job_post
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: job_post.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+  '/job_posts/{id}/exists':
+    get:
+      tags:
+        - job_post
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post.exists__get_job_posts_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/job_posts/{id}':
+    head:
+      tags:
+        - job_post
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post.exists__head_job_posts_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - job_post
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: job_post.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+    put:
+      tags:
+        - job_post
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post.replaceById__put_job_posts_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+    delete:
+      tags:
+        - job_post
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: job_post.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - job_post
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: job_post.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post'
+        - name: id
+          in: path
+          description: job_post id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+  '/job_posts/{id}/replace':
+    post:
+      tags:
+        - job_post
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post.replaceById__post_job_posts_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+  /job_posts/findOne:
+    get:
+      tags:
+        - job_post
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: job_post.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post'
+      deprecated: false
+  /job_posts/update:
+    post:
+      tags:
+        - job_post
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: job_post.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /job_posts/count:
+    get:
+      tags:
+        - job_post
+      summary: Count instances of the model matched by where from the data source.
+      operationId: job_post.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /job_post_skill_sets:
+    post:
+      tags:
+        - job_post_skill_set
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: job_post_skill_set.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    patch:
+      tags:
+        - job_post_skill_set
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: job_post_skill_set.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    put:
+      tags:
+        - job_post_skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_skill_set.replaceOrCreate__put_job_post_skill_sets
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    get:
+      tags:
+        - job_post_skill_set
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: job_post_skill_set.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  /job_post_skill_sets/replaceOrCreate:
+    post:
+      tags:
+        - job_post_skill_set
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_skill_set.replaceOrCreate__post_job_post_skill_sets_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  /job_post_skill_sets/upsertWithWhere:
+    post:
+      tags:
+        - job_post_skill_set
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: job_post_skill_set.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  '/job_post_skill_sets/{id}/exists':
+    get:
+      tags:
+        - job_post_skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post_skill_set.exists__get_job_post_skill_sets_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/job_post_skill_sets/{id}':
+    head:
+      tags:
+        - job_post_skill_set
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_post_skill_set.exists__head_job_post_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - job_post_skill_set
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: job_post_skill_set.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    put:
+      tags:
+        - job_post_skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post_skill_set.replaceById__put_job_post_skill_sets_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - job_post_skill_set
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: job_post_skill_set.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - job_post_skill_set
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: job_post_skill_set.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_skill_set'
+        - name: id
+          in: path
+          description: job_post_skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  '/job_post_skill_sets/{id}/replace':
+    post:
+      tags:
+        - job_post_skill_set
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_post_skill_set.replaceById__post_job_post_skill_sets_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  /job_post_skill_sets/findOne:
+    get:
+      tags:
+        - job_post_skill_set
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: job_post_skill_set.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  /job_post_skill_sets/update:
+    post:
+      tags:
+        - job_post_skill_set
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: job_post_skill_set.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_post_skill_set'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /job_post_skill_sets/count:
+    get:
+      tags:
+        - job_post_skill_set
+      summary: Count instances of the model matched by where from the data source.
+      operationId: job_post_skill_set.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /job_types:
+    post:
+      tags:
+        - job_type
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: job_type.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+    patch:
+      tags:
+        - job_type
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: job_type.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+    put:
+      tags:
+        - job_type
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_type.replaceOrCreate__put_job_types
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+    get:
+      tags:
+        - job_type
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: job_type.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_type'
+      deprecated: false
+  /job_types/replaceOrCreate:
+    post:
+      tags:
+        - job_type
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_type.replaceOrCreate__post_job_types_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+  /job_types/upsertWithWhere:
+    post:
+      tags:
+        - job_type
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: job_type.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+  '/job_types/{id}/exists':
+    get:
+      tags:
+        - job_type
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_type.exists__get_job_types_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/job_types/{id}':
+    head:
+      tags:
+        - job_type
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_type.exists__head_job_types_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - job_type
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: job_type.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+    put:
+      tags:
+        - job_type
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_type.replaceById__put_job_types_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+    delete:
+      tags:
+        - job_type
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: job_type.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - job_type
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: job_type.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_type'
+        - name: id
+          in: path
+          description: job_type id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+  '/job_types/{id}/replace':
+    post:
+      tags:
+        - job_type
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_type.replaceById__post_job_types_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+  /job_types/findOne:
+    get:
+      tags:
+        - job_type
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: job_type.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_type'
+      deprecated: false
+  /job_types/update:
+    post:
+      tags:
+        - job_type
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: job_type.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_type'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /job_types/count:
+    get:
+      tags:
+        - job_type
+      summary: Count instances of the model matched by where from the data source.
+      operationId: job_type.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /job_locations:
+    post:
+      tags:
+        - job_location
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: job_location.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+    patch:
+      tags:
+        - job_location
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: job_location.patchOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+    put:
+      tags:
+        - job_location
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_location.replaceOrCreate__put_job_locations
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+    get:
+      tags:
+        - job_location
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: job_location.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_location'
+      deprecated: false
+  /job_locations/replaceOrCreate:
+    post:
+      tags:
+        - job_location
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_location.replaceOrCreate__post_job_locations_replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+  /job_locations/upsertWithWhere:
+    post:
+      tags:
+        - job_location
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: job_location.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+  '/job_locations/{id}/exists':
+    get:
+      tags:
+        - job_location
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_location.exists__get_job_locations_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/job_locations/{id}':
+    head:
+      tags:
+        - job_location
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'job_location.exists__head_job_locations_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - job_location
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: job_location.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+    put:
+      tags:
+        - job_location
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_location.replaceById__put_job_locations_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+    delete:
+      tags:
+        - job_location
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: job_location.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    patch:
+      tags:
+        - job_location
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: job_location.prototype.patchAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_location'
+        - name: id
+          in: path
+          description: job_location id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+  '/job_locations/{id}/replace':
+    post:
+      tags:
+        - job_location
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: 'job_location.replaceById__post_job_locations_{id}_replace'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+  /job_locations/findOne:
+    get:
+      tags:
+        - job_location
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: job_location.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_location'
+      deprecated: false
+  /job_locations/update:
+    post:
+      tags:
+        - job_location
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: job_location.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/job_location'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /job_locations/count:
+    get:
+      tags:
+        - job_location
+      summary: Count instances of the model matched by where from the data source.
+      operationId: job_location.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+definitions:
+  x-any:
+    properties: {}
+  user_account:
+    properties:
+      User_account_Id:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      date_of_birth:
+        type: string
+        format: date-time
+      gender:
+        type: string
+      is_active:
+        type: boolean
+      contact_number:
+        type: number
+        format: double
+      sms_notification_active:
+        type: boolean
+      email_notification_active:
+        type: boolean
+      user_image:
+        $ref: '#/definitions/x-any'
+      registration_date:
+        type: string
+        format: date-time
+      User_type_Id:
+        type: string
+    required:
+      - User_account_Id
+    additionalProperties: false
+  user_type:
+    properties:
+      User_type_Id:
+        type: string
+      user_type_name:
+        type: string
+    required:
+      - User_type_Id
+    additionalProperties: false
+  user_log:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  business_stream:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  company:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  company_image:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  education_detail:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  experience_detail:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  seeker_profile:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  seeker_skill_set:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  skill_set:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  job_post_activity:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  job_post:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  job_post_skill_set:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  job_type:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  job_location:
+    properties:
+      id:
+        $ref: '#/definitions/ObjectID'
+    additionalProperties: false
+  ObjectID:
+    type: string
+    pattern: "^[a-fA-F\\d]{24}$"
+basePath: /api
 swagger: '2.0'
-
 info:
   x-ibm-name: onlinejobportal
   version: 1.0.0
   title: OnlineJobPortal
-
 schemes:
   - https
 host: $(catalog.host)
-basePath: /api
-
 consumes:
   - application/json
 produces:
   - application/json
-
 securityDefinitions:
- clientIdHeader:
-   type: apiKey
-   in: header
-   name: X-IBM-Client-Id
- clientSecretHeader:
-   in: "header"
-   name: "X-IBM-Client-Secret"
-   type: "apiKey"
-
-
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
 security:
- -
-   clientIdHeader: []
-   clientSecretHeader: []
-
+  - clientIdHeader: []
+    clientSecretHeader: []
 x-ibm-configuration:
   testable: true
   enforced: true
@@ -47,9 +6087,3 @@ x-ibm-configuration:
     execute:
       - invoke:
           target-url: $(runtime-url)$(request.path)$(request.search)
-
-paths: {}
-
-
-definitions: {}
-

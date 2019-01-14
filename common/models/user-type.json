@@ -1,0 +1,27 @@
+{
+  "name": "user_type",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "User_type_Id": {
+      "type": "string",
+      "id": true
+    },
+    "user_type_name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user_accounts": {
+      "type": "hasMany",
+      "model": "user_account",
+      "foreignKey": "User_type_Id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
