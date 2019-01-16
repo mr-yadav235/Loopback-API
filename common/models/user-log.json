@@ -8,19 +8,21 @@
   "properties": {
     "User_log_id": {
       "type": "string",
-      "id": true
-    },
-    "last_login_date": {
-      "type": "date"
+      "id": true,
+      "required": true,
+      "isArray": false
     },
     "last_job_apply_date": {
+      "type": "date"
+    },
+    "last_login_date": {
       "type": "date"
     }
   },
   "validations": [],
   "relations": {
-    "user_account": {
-      "type": "hasOne",
+    "user_accounts": {
+      "type": "belongsTo",
       "model": "user_account",
       "foreignKey": "User_log_id"
     }

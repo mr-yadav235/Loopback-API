@@ -8,7 +8,9 @@
   "properties": {
     "User_type_Id": {
       "type": "string",
-      "id": true
+      "id": true,
+      "required": true,
+      "isArray": false
     },
     "user_type_name": {
       "type": "string"

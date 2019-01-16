@@ -1,12 +1,11 @@
 {
-  "loopback-db": {
+  "My-sql-db": {
     "host": "localhost",
-    "port": 27017,
-    "url": "mongodb://localhost:27017/mydb",
-    "database": "mydb",
-    "password": "",
-    "name": "loopback-db",
-    "user": "",
-    "connector": "mongodb"
+    "port": 3306,
+    "url": "mysql://root@localhost/loopback-db",
+    "database": "loopback-db",
+    "name": "My-sql-db",
+    "connector": "mysql",
+    "user": "root"
   }
 }

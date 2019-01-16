@@ -14,67 +14,67 @@
     ]
   },
   "user_type": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "user_account": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "user_log": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "business_stream": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "company": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "company_image": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "education_detail": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "experience_detail": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "seeker_profile": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "seeker_skill_set": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "skill_set": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "job_post_activity": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "job_post": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "job_post_skill_set": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "job_type": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   },
   "job_location": {
-    "dataSource": "loopback-db",
+    "dataSource": "My-sql-db",
     "public": true
   }
 }
