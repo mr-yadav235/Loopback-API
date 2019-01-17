@@ -192,9 +192,7 @@ paths:
     patch:
       tags:
         - user_type
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: user_type.patchOrCreate
       parameters:
         - name: data
@@ -213,9 +211,7 @@ paths:
     put:
       tags:
         - user_type
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_type.replaceOrCreate__put_user_types
       parameters:
         - name: data
@@ -239,9 +235,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -257,9 +251,7 @@ paths:
     post:
       tags:
         - user_type
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_type.replaceOrCreate__post_user_types_replaceOrCreate
       parameters:
         - name: data
@@ -279,9 +271,7 @@ paths:
     post:
       tags:
         - user_type
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: user_type.upsertWithWhere
       parameters:
         - name: where
@@ -361,9 +351,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -376,9 +364,7 @@ paths:
     put:
       tags:
         - user_type
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_type.replaceById__put_user_types_{id}'
       parameters:
         - name: id
@@ -421,9 +407,7 @@ paths:
     patch:
       tags:
         - user_type
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: user_type.prototype.patchAttributes
       parameters:
         - name: data
@@ -449,9 +433,7 @@ paths:
     post:
       tags:
         - user_type
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_type.replaceById__post_user_types_{id}_replace'
       parameters:
         - name: id
@@ -482,9 +464,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -548,82 +528,6 @@ paths:
               count:
                 type: number
                 format: double
-      deprecated: false
-  '/user_accounts/{id}/user_logs/{fk}':
-    get:
-      tags:
-        - user_account
-      summary: Find a related item by id for user_logs.
-      operationId: user_account.prototype.__findById__user_logs
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for user_logs
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/user_log'
-      deprecated: false
-    delete:
-      tags:
-        - user_account
-      summary: Delete a related item by id for user_logs.
-      operationId: user_account.prototype.__destroyById__user_logs
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for user_logs
-          required: true
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-    put:
-      tags:
-        - user_account
-      summary: Update a related item by id for user_logs.
-      operationId: user_account.prototype.__updateById__user_logs
-      parameters:
-        - name: fk
-          in: path
-          description: Foreign key for user_logs
-          required: true
-          type: string
-          format: JSON
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/user_log'
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/user_log'
       deprecated: false
   '/user_accounts/{id}/seeker_profiles/{fk}':
     get:
@@ -852,100 +756,6 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/job_post'
-      deprecated: false
-  '/user_accounts/{id}/user_logs':
-    get:
-      tags:
-        - user_account
-      summary: Queries user_logs of user_account.
-      operationId: user_account.prototype.__get__user_logs
-      parameters:
-        - name: filter
-          in: query
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/user_log'
-      deprecated: false
-    post:
-      tags:
-        - user_account
-      summary: Creates a new instance in user_logs of this model.
-      operationId: user_account.prototype.__create__user_logs
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/user_log'
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/user_log'
-      deprecated: false
-    delete:
-      tags:
-        - user_account
-      summary: Deletes all user_logs of this model.
-      operationId: user_account.prototype.__delete__user_logs
-      parameters:
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
-      deprecated: false
-  '/user_accounts/{id}/user_logs/count':
-    get:
-      tags:
-        - user_account
-      summary: Counts user_logs of user_account.
-      operationId: user_account.prototype.__count__user_logs
-      parameters:
-        - name: where
-          in: query
-          description: Criteria to match model instances
-          required: false
-          type: string
-          format: JSON
-        - name: id
-          in: path
-          description: user_account id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              count:
-                type: number
-                format: double
       deprecated: false
   '/user_accounts/{id}/seeker_profiles':
     get:
@@ -1252,9 +1062,7 @@ paths:
     patch:
       tags:
         - user_account
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: user_account.patchOrCreate
       parameters:
         - name: data
@@ -1273,9 +1081,7 @@ paths:
     put:
       tags:
         - user_account
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_account.replaceOrCreate__put_user_accounts
       parameters:
         - name: data
@@ -1299,9 +1105,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1317,9 +1121,7 @@ paths:
     post:
       tags:
         - user_account
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_account.replaceOrCreate__post_user_accounts_replaceOrCreate
       parameters:
         - name: data
@@ -1339,9 +1141,7 @@ paths:
     post:
       tags:
         - user_account
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: user_account.upsertWithWhere
       parameters:
         - name: where
@@ -1421,9 +1221,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1436,9 +1234,7 @@ paths:
     put:
       tags:
         - user_account
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_account.replaceById__put_user_accounts_{id}'
       parameters:
         - name: id
@@ -1481,9 +1277,7 @@ paths:
     patch:
       tags:
         - user_account
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: user_account.prototype.patchAttributes
       parameters:
         - name: data
@@ -1509,9 +1303,7 @@ paths:
     post:
       tags:
         - user_account
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_account.replaceById__post_user_accounts_{id}_replace'
       parameters:
         - name: id
@@ -1542,9 +1334,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1609,12 +1399,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  '/user_logs/{id}/user_account':
+  '/user_logs/{id}/user_accounts':
     get:
       tags:
         - user_log
-      summary: Fetches hasOne relation user_account.
-      operationId: user_log.prototype.__get__user_account
+      summary: Fetches belongsTo relation user_accounts.
+      operationId: user_log.prototype.__get__user_accounts
       parameters:
         - name: refresh
           in: query
@@ -1631,68 +1421,6 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/user_account'
-      deprecated: false
-    post:
-      tags:
-        - user_log
-      summary: Creates a new instance in user_account of this model.
-      operationId: user_log.prototype.__create__user_account
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/user_account'
-        - name: id
-          in: path
-          description: user_log id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/user_account'
-      deprecated: false
-    put:
-      tags:
-        - user_log
-      summary: Update user_account of this model.
-      operationId: user_log.prototype.__update__user_account
-      parameters:
-        - name: data
-          in: body
-          required: false
-          schema:
-            $ref: '#/definitions/user_account'
-        - name: id
-          in: path
-          description: user_log id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            $ref: '#/definitions/user_account'
-      deprecated: false
-    delete:
-      tags:
-        - user_log
-      summary: Deletes user_account of this model.
-      operationId: user_log.prototype.__destroy__user_account
-      parameters:
-        - name: id
-          in: path
-          description: user_log id
-          required: true
-          type: string
-          format: JSON
-      responses:
-        '204':
-          description: Request was successful
       deprecated: false
   /user_logs:
     post:
@@ -1717,9 +1445,7 @@ paths:
     patch:
       tags:
         - user_log
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: user_log.patchOrCreate
       parameters:
         - name: data
@@ -1738,9 +1464,7 @@ paths:
     put:
       tags:
         - user_log
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_log.replaceOrCreate__put_user_logs
       parameters:
         - name: data
@@ -1764,9 +1488,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1782,9 +1504,7 @@ paths:
     post:
       tags:
         - user_log
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: user_log.replaceOrCreate__post_user_logs_replaceOrCreate
       parameters:
         - name: data
@@ -1804,9 +1524,7 @@ paths:
     post:
       tags:
         - user_log
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: user_log.upsertWithWhere
       parameters:
         - name: where
@@ -1886,9 +1604,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -1901,9 +1617,7 @@ paths:
     put:
       tags:
         - user_log
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_log.replaceById__put_user_logs_{id}'
       parameters:
         - name: id
@@ -1946,9 +1660,7 @@ paths:
     patch:
       tags:
         - user_log
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: user_log.prototype.patchAttributes
       parameters:
         - name: data
@@ -1974,9 +1686,7 @@ paths:
     post:
       tags:
         - user_log
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'user_log.replaceById__post_user_logs_{id}_replace'
       parameters:
         - name: id
@@ -2007,9 +1717,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2074,6 +1782,176 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  '/business_streams/{id}/companies/{fk}':
+    get:
+      tags:
+        - business_stream
+      summary: Find a related item by id for companies.
+      operationId: business_stream.prototype.__findById__companies
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for companies
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    delete:
+      tags:
+        - business_stream
+      summary: Delete a related item by id for companies.
+      operationId: business_stream.prototype.__destroyById__companies
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for companies
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - business_stream
+      summary: Update a related item by id for companies.
+      operationId: business_stream.prototype.__updateById__companies
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for companies
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/company'
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+  '/business_streams/{id}/companies':
+    get:
+      tags:
+        - business_stream
+      summary: Queries companies of business_stream.
+      operationId: business_stream.prototype.__get__companies
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/company'
+      deprecated: false
+    post:
+      tags:
+        - business_stream
+      summary: Creates a new instance in companies of this model.
+      operationId: business_stream.prototype.__create__companies
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/company'
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company'
+      deprecated: false
+    delete:
+      tags:
+        - business_stream
+      summary: Deletes all companies of this model.
+      operationId: business_stream.prototype.__delete__companies
+      parameters:
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/business_streams/{id}/companies/count':
+    get:
+      tags:
+        - business_stream
+      summary: Counts companies of business_stream.
+      operationId: business_stream.prototype.__count__companies
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: business_stream id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
   /business_streams:
     post:
       tags:
@@ -2097,9 +1975,7 @@ paths:
     patch:
       tags:
         - business_stream
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: business_stream.patchOrCreate
       parameters:
         - name: data
@@ -2118,9 +1994,7 @@ paths:
     put:
       tags:
         - business_stream
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: business_stream.replaceOrCreate__put_business_streams
       parameters:
         - name: data
@@ -2144,9 +2018,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2162,9 +2034,7 @@ paths:
     post:
       tags:
         - business_stream
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: business_stream.replaceOrCreate__post_business_streams_replaceOrCreate
       parameters:
         - name: data
@@ -2184,9 +2054,7 @@ paths:
     post:
       tags:
         - business_stream
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: business_stream.upsertWithWhere
       parameters:
         - name: where
@@ -2266,9 +2134,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2281,9 +2147,7 @@ paths:
     put:
       tags:
         - business_stream
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'business_stream.replaceById__put_business_streams_{id}'
       parameters:
         - name: id
@@ -2326,9 +2190,7 @@ paths:
     patch:
       tags:
         - business_stream
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: business_stream.prototype.patchAttributes
       parameters:
         - name: data
@@ -2354,9 +2216,7 @@ paths:
     post:
       tags:
         - business_stream
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'business_stream.replaceById__post_business_streams_{id}_replace'
       parameters:
         - name: id
@@ -2387,9 +2247,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2454,6 +2312,29 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  '/companies/{id}/company_images':
+    get:
+      tags:
+        - company
+      summary: Fetches belongsTo relation company_images.
+      operationId: company.prototype.__get__company_images
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
   /companies:
     post:
       tags:
@@ -2477,9 +2358,7 @@ paths:
     patch:
       tags:
         - company
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: company.patchOrCreate
       parameters:
         - name: data
@@ -2498,9 +2377,7 @@ paths:
     put:
       tags:
         - company
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: company.replaceOrCreate__put_companies
       parameters:
         - name: data
@@ -2524,9 +2401,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2542,9 +2417,7 @@ paths:
     post:
       tags:
         - company
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: company.replaceOrCreate__post_companies_replaceOrCreate
       parameters:
         - name: data
@@ -2564,9 +2437,7 @@ paths:
     post:
       tags:
         - company
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: company.upsertWithWhere
       parameters:
         - name: where
@@ -2646,9 +2517,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2661,9 +2530,7 @@ paths:
     put:
       tags:
         - company
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'company.replaceById__put_companies_{id}'
       parameters:
         - name: id
@@ -2706,9 +2573,7 @@ paths:
     patch:
       tags:
         - company
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: company.prototype.patchAttributes
       parameters:
         - name: data
@@ -2734,9 +2599,7 @@ paths:
     post:
       tags:
         - company
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'company.replaceById__post_companies_{id}_replace'
       parameters:
         - name: id
@@ -2767,9 +2630,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2857,9 +2718,7 @@ paths:
     patch:
       tags:
         - company_image
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: company_image.patchOrCreate
       parameters:
         - name: data
@@ -2878,9 +2737,7 @@ paths:
     put:
       tags:
         - company_image
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: company_image.replaceOrCreate__put_company_images
       parameters:
         - name: data
@@ -2904,9 +2761,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -2922,9 +2777,7 @@ paths:
     post:
       tags:
         - company_image
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: company_image.replaceOrCreate__post_company_images_replaceOrCreate
       parameters:
         - name: data
@@ -2944,9 +2797,7 @@ paths:
     post:
       tags:
         - company_image
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: company_image.upsertWithWhere
       parameters:
         - name: where
@@ -3026,9 +2877,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3041,9 +2890,7 @@ paths:
     put:
       tags:
         - company_image
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'company_image.replaceById__put_company_images_{id}'
       parameters:
         - name: id
@@ -3086,9 +2933,7 @@ paths:
     patch:
       tags:
         - company_image
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: company_image.prototype.patchAttributes
       parameters:
         - name: data
@@ -3114,9 +2959,7 @@ paths:
     post:
       tags:
         - company_image
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'company_image.replaceById__post_company_images_{id}_replace'
       parameters:
         - name: id
@@ -3147,9 +2990,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3237,9 +3078,7 @@ paths:
     patch:
       tags:
         - education_detail
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: education_detail.patchOrCreate
       parameters:
         - name: data
@@ -3258,9 +3097,7 @@ paths:
     put:
       tags:
         - education_detail
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: education_detail.replaceOrCreate__put_education_details
       parameters:
         - name: data
@@ -3284,9 +3121,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3302,9 +3137,7 @@ paths:
     post:
       tags:
         - education_detail
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: education_detail.replaceOrCreate__post_education_details_replaceOrCreate
       parameters:
         - name: data
@@ -3324,9 +3157,7 @@ paths:
     post:
       tags:
         - education_detail
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: education_detail.upsertWithWhere
       parameters:
         - name: where
@@ -3406,9 +3237,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3421,9 +3250,7 @@ paths:
     put:
       tags:
         - education_detail
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'education_detail.replaceById__put_education_details_{id}'
       parameters:
         - name: id
@@ -3466,9 +3293,7 @@ paths:
     patch:
       tags:
         - education_detail
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: education_detail.prototype.patchAttributes
       parameters:
         - name: data
@@ -3494,9 +3319,7 @@ paths:
     post:
       tags:
         - education_detail
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'education_detail.replaceById__post_education_details_{id}_replace'
       parameters:
         - name: id
@@ -3527,9 +3350,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3617,9 +3438,7 @@ paths:
     patch:
       tags:
         - experience_detail
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: experience_detail.patchOrCreate
       parameters:
         - name: data
@@ -3638,9 +3457,7 @@ paths:
     put:
       tags:
         - experience_detail
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: experience_detail.replaceOrCreate__put_experience_details
       parameters:
         - name: data
@@ -3664,9 +3481,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3682,11 +3497,8 @@ paths:
     post:
       tags:
         - experience_detail
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
-      operationId: >-
-        experience_detail.replaceOrCreate__post_experience_details_replaceOrCreate
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: experience_detail.replaceOrCreate__post_experience_details_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -3705,9 +3517,7 @@ paths:
     post:
       tags:
         - experience_detail
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: experience_detail.upsertWithWhere
       parameters:
         - name: where
@@ -3787,9 +3597,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3802,9 +3610,7 @@ paths:
     put:
       tags:
         - experience_detail
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'experience_detail.replaceById__put_experience_details_{id}'
       parameters:
         - name: id
@@ -3847,9 +3653,7 @@ paths:
     patch:
       tags:
         - experience_detail
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: experience_detail.prototype.patchAttributes
       parameters:
         - name: data
@@ -3875,9 +3679,7 @@ paths:
     post:
       tags:
         - experience_detail
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'experience_detail.replaceById__post_experience_details_{id}_replace'
       parameters:
         - name: id
@@ -3908,9 +3710,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -3998,9 +3798,7 @@ paths:
     patch:
       tags:
         - seeker_profile
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: seeker_profile.patchOrCreate
       parameters:
         - name: data
@@ -4019,9 +3817,7 @@ paths:
     put:
       tags:
         - seeker_profile
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: seeker_profile.replaceOrCreate__put_seeker_profiles
       parameters:
         - name: data
@@ -4045,9 +3841,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4063,9 +3857,7 @@ paths:
     post:
       tags:
         - seeker_profile
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: seeker_profile.replaceOrCreate__post_seeker_profiles_replaceOrCreate
       parameters:
         - name: data
@@ -4085,9 +3877,7 @@ paths:
     post:
       tags:
         - seeker_profile
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: seeker_profile.upsertWithWhere
       parameters:
         - name: where
@@ -4167,9 +3957,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4182,9 +3970,7 @@ paths:
     put:
       tags:
         - seeker_profile
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'seeker_profile.replaceById__put_seeker_profiles_{id}'
       parameters:
         - name: id
@@ -4227,9 +4013,7 @@ paths:
     patch:
       tags:
         - seeker_profile
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: seeker_profile.prototype.patchAttributes
       parameters:
         - name: data
@@ -4255,9 +4039,7 @@ paths:
     post:
       tags:
         - seeker_profile
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'seeker_profile.replaceById__post_seeker_profiles_{id}_replace'
       parameters:
         - name: id
@@ -4288,9 +4070,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4378,9 +4158,7 @@ paths:
     patch:
       tags:
         - seeker_skill_set
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: seeker_skill_set.patchOrCreate
       parameters:
         - name: data
@@ -4399,9 +4177,7 @@ paths:
     put:
       tags:
         - seeker_skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: seeker_skill_set.replaceOrCreate__put_seeker_skill_sets
       parameters:
         - name: data
@@ -4425,9 +4201,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4443,9 +4217,7 @@ paths:
     post:
       tags:
         - seeker_skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: seeker_skill_set.replaceOrCreate__post_seeker_skill_sets_replaceOrCreate
       parameters:
         - name: data
@@ -4465,9 +4237,7 @@ paths:
     post:
       tags:
         - seeker_skill_set
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: seeker_skill_set.upsertWithWhere
       parameters:
         - name: where
@@ -4547,9 +4317,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4562,9 +4330,7 @@ paths:
     put:
       tags:
         - seeker_skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'seeker_skill_set.replaceById__put_seeker_skill_sets_{id}'
       parameters:
         - name: id
@@ -4607,9 +4373,7 @@ paths:
     patch:
       tags:
         - seeker_skill_set
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: seeker_skill_set.prototype.patchAttributes
       parameters:
         - name: data
@@ -4635,9 +4399,7 @@ paths:
     post:
       tags:
         - seeker_skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'seeker_skill_set.replaceById__post_seeker_skill_sets_{id}_replace'
       parameters:
         - name: id
@@ -4668,9 +4430,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4758,9 +4518,7 @@ paths:
     patch:
       tags:
         - skill_set
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: skill_set.patchOrCreate
       parameters:
         - name: data
@@ -4779,9 +4537,7 @@ paths:
     put:
       tags:
         - skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: skill_set.replaceOrCreate__put_skill_sets
       parameters:
         - name: data
@@ -4805,9 +4561,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4823,9 +4577,7 @@ paths:
     post:
       tags:
         - skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: skill_set.replaceOrCreate__post_skill_sets_replaceOrCreate
       parameters:
         - name: data
@@ -4845,9 +4597,7 @@ paths:
     post:
       tags:
         - skill_set
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: skill_set.upsertWithWhere
       parameters:
         - name: where
@@ -4927,9 +4677,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -4942,9 +4690,7 @@ paths:
     put:
       tags:
         - skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'skill_set.replaceById__put_skill_sets_{id}'
       parameters:
         - name: id
@@ -4987,9 +4733,7 @@ paths:
     patch:
       tags:
         - skill_set
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: skill_set.prototype.patchAttributes
       parameters:
         - name: data
@@ -5015,9 +4759,7 @@ paths:
     post:
       tags:
         - skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'skill_set.replaceById__post_skill_sets_{id}_replace'
       parameters:
         - name: id
@@ -5048,9 +4790,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5138,9 +4878,7 @@ paths:
     patch:
       tags:
         - job_post_activity
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: job_post_activity.patchOrCreate
       parameters:
         - name: data
@@ -5159,9 +4897,7 @@ paths:
     put:
       tags:
         - job_post_activity
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_post_activity.replaceOrCreate__put_job_post_activities
       parameters:
         - name: data
@@ -5185,9 +4921,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5203,11 +4937,8 @@ paths:
     post:
       tags:
         - job_post_activity
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
-      operationId: >-
-        job_post_activity.replaceOrCreate__post_job_post_activities_replaceOrCreate
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_activity.replaceOrCreate__post_job_post_activities_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -5226,9 +4957,7 @@ paths:
     post:
       tags:
         - job_post_activity
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: job_post_activity.upsertWithWhere
       parameters:
         - name: where
@@ -5308,9 +5037,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5323,9 +5050,7 @@ paths:
     put:
       tags:
         - job_post_activity
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post_activity.replaceById__put_job_post_activities_{id}'
       parameters:
         - name: id
@@ -5368,9 +5093,7 @@ paths:
     patch:
       tags:
         - job_post_activity
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: job_post_activity.prototype.patchAttributes
       parameters:
         - name: data
@@ -5396,9 +5119,7 @@ paths:
     post:
       tags:
         - job_post_activity
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post_activity.replaceById__post_job_post_activities_{id}_replace'
       parameters:
         - name: id
@@ -5429,9 +5150,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5519,9 +5238,7 @@ paths:
     patch:
       tags:
         - job_post
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: job_post.patchOrCreate
       parameters:
         - name: data
@@ -5540,9 +5257,7 @@ paths:
     put:
       tags:
         - job_post
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_post.replaceOrCreate__put_job_posts
       parameters:
         - name: data
@@ -5566,9 +5281,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5584,9 +5297,7 @@ paths:
     post:
       tags:
         - job_post
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_post.replaceOrCreate__post_job_posts_replaceOrCreate
       parameters:
         - name: data
@@ -5606,9 +5317,7 @@ paths:
     post:
       tags:
         - job_post
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: job_post.upsertWithWhere
       parameters:
         - name: where
@@ -5688,9 +5397,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5703,9 +5410,7 @@ paths:
     put:
       tags:
         - job_post
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post.replaceById__put_job_posts_{id}'
       parameters:
         - name: id
@@ -5748,9 +5453,7 @@ paths:
     patch:
       tags:
         - job_post
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: job_post.prototype.patchAttributes
       parameters:
         - name: data
@@ -5776,9 +5479,7 @@ paths:
     post:
       tags:
         - job_post
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post.replaceById__post_job_posts_{id}_replace'
       parameters:
         - name: id
@@ -5809,9 +5510,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5899,9 +5598,7 @@ paths:
     patch:
       tags:
         - job_post_skill_set
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: job_post_skill_set.patchOrCreate
       parameters:
         - name: data
@@ -5920,9 +5617,7 @@ paths:
     put:
       tags:
         - job_post_skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_post_skill_set.replaceOrCreate__put_job_post_skill_sets
       parameters:
         - name: data
@@ -5946,9 +5641,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -5964,11 +5657,8 @@ paths:
     post:
       tags:
         - job_post_skill_set
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
-      operationId: >-
-        job_post_skill_set.replaceOrCreate__post_job_post_skill_sets_replaceOrCreate
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: job_post_skill_set.replaceOrCreate__post_job_post_skill_sets_replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -5987,9 +5677,7 @@ paths:
     post:
       tags:
         - job_post_skill_set
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: job_post_skill_set.upsertWithWhere
       parameters:
         - name: where
@@ -6069,9 +5757,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6084,9 +5770,7 @@ paths:
     put:
       tags:
         - job_post_skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post_skill_set.replaceById__put_job_post_skill_sets_{id}'
       parameters:
         - name: id
@@ -6129,9 +5813,7 @@ paths:
     patch:
       tags:
         - job_post_skill_set
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: job_post_skill_set.prototype.patchAttributes
       parameters:
         - name: data
@@ -6157,9 +5839,7 @@ paths:
     post:
       tags:
         - job_post_skill_set
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_post_skill_set.replaceById__post_job_post_skill_sets_{id}_replace'
       parameters:
         - name: id
@@ -6190,9 +5870,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6280,9 +5958,7 @@ paths:
     patch:
       tags:
         - job_type
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: job_type.patchOrCreate
       parameters:
         - name: data
@@ -6301,9 +5977,7 @@ paths:
     put:
       tags:
         - job_type
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_type.replaceOrCreate__put_job_types
       parameters:
         - name: data
@@ -6327,9 +6001,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6345,9 +6017,7 @@ paths:
     post:
       tags:
         - job_type
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_type.replaceOrCreate__post_job_types_replaceOrCreate
       parameters:
         - name: data
@@ -6367,9 +6037,7 @@ paths:
     post:
       tags:
         - job_type
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: job_type.upsertWithWhere
       parameters:
         - name: where
@@ -6449,9 +6117,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6464,9 +6130,7 @@ paths:
     put:
       tags:
         - job_type
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_type.replaceById__put_job_types_{id}'
       parameters:
         - name: id
@@ -6509,9 +6173,7 @@ paths:
     patch:
       tags:
         - job_type
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: job_type.prototype.patchAttributes
       parameters:
         - name: data
@@ -6537,9 +6199,7 @@ paths:
     post:
       tags:
         - job_type
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_type.replaceById__post_job_types_{id}_replace'
       parameters:
         - name: id
@@ -6570,9 +6230,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6660,9 +6318,7 @@ paths:
     patch:
       tags:
         - job_location
-      summary: >-
-        Patch an existing model instance or insert a new one into the data
-        source.
+      summary: Patch an existing model instance or insert a new one into the data source.
       operationId: job_location.patchOrCreate
       parameters:
         - name: data
@@ -6681,9 +6337,7 @@ paths:
     put:
       tags:
         - job_location
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_location.replaceOrCreate__put_job_locations
       parameters:
         - name: data
@@ -6707,9 +6361,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6725,9 +6377,7 @@ paths:
     post:
       tags:
         - job_location
-      summary: >-
-        Replace an existing model instance or insert a new one into the data
-        source.
+      summary: Replace an existing model instance or insert a new one into the data source.
       operationId: job_location.replaceOrCreate__post_job_locations_replaceOrCreate
       parameters:
         - name: data
@@ -6747,9 +6397,7 @@ paths:
     post:
       tags:
         - job_location
-      summary: >-
-        Update an existing model instance or insert a new one into the data
-        source based on the where criteria.
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
       operationId: job_location.upsertWithWhere
       parameters:
         - name: where
@@ -6829,9 +6477,7 @@ paths:
           format: JSON
         - name: filter
           in: query
-          description: >-
-            Filter defining fields and include - must be a JSON-encoded string
-            ({"something":"value"})
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -6844,9 +6490,7 @@ paths:
     put:
       tags:
         - job_location
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_location.replaceById__put_job_locations_{id}'
       parameters:
         - name: id
@@ -6889,9 +6533,7 @@ paths:
     patch:
       tags:
         - job_location
-      summary: >-
-        Patch attributes for a model instance and persist it into the data
-        source.
+      summary: Patch attributes for a model instance and persist it into the data source.
       operationId: job_location.prototype.patchAttributes
       parameters:
         - name: data
@@ -6917,9 +6559,7 @@ paths:
     post:
       tags:
         - job_location
-      summary: >-
-        Replace attributes for a model instance and persist it into the data
-        source.
+      summary: Replace attributes for a model instance and persist it into the data source.
       operationId: 'job_location.replaceById__post_job_locations_{id}_replace'
       parameters:
         - name: id
@@ -6950,9 +6590,7 @@ paths:
       parameters:
         - name: filter
           in: query
-          description: >-
-            Filter defining fields, where, include, order, offset, and limit -
-            must be a JSON-encoded string ({"something":"value"})
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
           required: false
           type: string
           format: JSON
@@ -7061,21 +6699,6 @@ definitions:
     required:
       - User_type_Id
     additionalProperties: false
-  user_log:
-    properties:
-      User_log_id:
-        type: string
-      last_job_apply_date:
-        type: string
-        format: date-time
-      last_login_date:
-        type: string
-        format: date-time
-      User_account_Id:
-        type: string
-    required:
-      - User_log_id
-    additionalProperties: false
   seeker_profile:
     properties:
       id:
@@ -7100,23 +6723,58 @@ definitions:
       User_account_Id:
         type: string
     additionalProperties: false
-  business_stream:
+  user_log:
     properties:
-      id:
-        type: number
-        format: double
+      User_log_id:
+        type: string
+      last_job_apply_date:
+        type: string
+        format: date-time
+      last_login_date:
+        type: string
+        format: date-time
+    required:
+      - User_log_id
     additionalProperties: false
   company:
     properties:
-      id:
+      company_id:
         type: number
         format: double
+      company_name:
+        type: string
+      profile_description:
+        type: string
+      establishment_date:
+        type: string
+        format: date-time
+      company_website_url:
+        type: string
+      business_stream_id:
+        type: number
+        format: double
+    required:
+      - company_id
+    additionalProperties: false
+  business_stream:
+    properties:
+      business_stream_id:
+        type: number
+        format: double
+      business_stream_name:
+        type: string
+    required:
+      - business_stream_id
     additionalProperties: false
   company_image:
     properties:
-      id:
+      company_image:
+        $ref: '#/definitions/x-any'
+      company_image_id:
         type: number
         format: double
+    required:
+      - company_image_id
     additionalProperties: false
   education_detail:
     properties:

@@ -54,7 +54,6 @@
   },
   "validations": [],
   "relations": {
-    
     "seeker_profiles": {
       "type": "hasMany",
       "model": "seeker_profile",

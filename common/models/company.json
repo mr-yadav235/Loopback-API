@@ -5,9 +5,38 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "company_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "company_name": {
+      "type": "string",
+      "required": false
+    },
+    "profile_description": {
+      "type": "string",
+      "required": false
+    },
+    "establishment_date": {
+      "type": "date",
+      "required": false
+    },
+    "company_website_url": {
+      "type": "string",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "company_images": {
+      "type": "hasMany",
+      "model": "company_image",
+      "foreignKey": "company_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

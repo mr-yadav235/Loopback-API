@@ -5,9 +5,25 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "business_stream_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "business_stream_name": {
+      "type": "string"
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "companies": {
+      "type": "hasMany",
+      "model": "company",
+      "foreignKey": "business_stream_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

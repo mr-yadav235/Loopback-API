@@ -5,7 +5,17 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "company_image": {
+      "type": "any"
+    },
+    "company_image_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],
