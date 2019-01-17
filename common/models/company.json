@@ -35,6 +35,11 @@
       "type": "hasMany",
       "model": "company_image",
       "foreignKey": "company_id"
+    },
+    "job_posts": {
+      "type": "hasMany",
+      "model": "job_post",
+      "foreignKey": "company_id"
     }
   },
   "acls": [],

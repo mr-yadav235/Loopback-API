@@ -5,7 +5,20 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "job_post_activity_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "apply_date": {
+      "type": "number",
+      "id": false,
+      "required": true,
+      "isArray": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

@@ -2312,17 +2312,19 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  '/companies/{id}/company_images':
+  '/companies/{id}/company_images/{fk}':
     get:
       tags:
         - company
-      summary: Fetches belongsTo relation company_images.
-      operationId: company.prototype.__get__company_images
+      summary: Find a related item by id for company_images.
+      operationId: company.prototype.__findById__company_images
       parameters:
-        - name: refresh
-          in: query
-          required: false
-          type: boolean
+        - name: fk
+          in: path
+          description: Foreign key for company_images
+          required: true
+          type: string
+          format: JSON
         - name: id
           in: path
           description: company id
@@ -2334,6 +2336,151 @@ paths:
           description: Request was successful
           schema:
             $ref: '#/definitions/company_image'
+      deprecated: false
+    delete:
+      tags:
+        - company
+      summary: Delete a related item by id for company_images.
+      operationId: company.prototype.__destroyById__company_images
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for company_images
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - company
+      summary: Update a related item by id for company_images.
+      operationId: company.prototype.__updateById__company_images
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for company_images
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/company_image'
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+  '/companies/{id}/company_images':
+    get:
+      tags:
+        - company
+      summary: Queries company_images of company.
+      operationId: company.prototype.__get__company_images
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/company_image'
+      deprecated: false
+    post:
+      tags:
+        - company
+      summary: Creates a new instance in company_images of this model.
+      operationId: company.prototype.__create__company_images
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/company_image'
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/company_image'
+      deprecated: false
+    delete:
+      tags:
+        - company
+      summary: Deletes all company_images of this model.
+      operationId: company.prototype.__delete__company_images
+      parameters:
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/companies/{id}/company_images/count':
+    get:
+      tags:
+        - company
+      summary: Counts company_images of company.
+      operationId: company.prototype.__count__company_images
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: company id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
   /companies:
     post:
@@ -3775,6 +3922,516 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  '/seeker_profiles/{id}/experience_details/{fk}':
+    get:
+      tags:
+        - seeker_profile
+      summary: Find a related item by id for experience_details.
+      operationId: seeker_profile.prototype.__findById__experience_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for experience_details
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Delete a related item by id for experience_details.
+      operationId: seeker_profile.prototype.__destroyById__experience_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for experience_details
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - seeker_profile
+      summary: Update a related item by id for experience_details.
+      operationId: seeker_profile.prototype.__updateById__experience_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for experience_details
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/experience_detail'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+  '/seeker_profiles/{id}/education_details/{fk}':
+    get:
+      tags:
+        - seeker_profile
+      summary: Find a related item by id for education_details.
+      operationId: seeker_profile.prototype.__findById__education_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for education_details
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Delete a related item by id for education_details.
+      operationId: seeker_profile.prototype.__destroyById__education_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for education_details
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - seeker_profile
+      summary: Update a related item by id for education_details.
+      operationId: seeker_profile.prototype.__updateById__education_details
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for education_details
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/education_detail'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+  '/seeker_profiles/{id}/seeker_skill_sets/{fk}':
+    get:
+      tags:
+        - seeker_profile
+      summary: Find a related item by id for seeker_skill_sets.
+      operationId: seeker_profile.prototype.__findById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Delete a related item by id for seeker_skill_sets.
+      operationId: seeker_profile.prototype.__destroyById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - seeker_profile
+      summary: Update a related item by id for seeker_skill_sets.
+      operationId: seeker_profile.prototype.__updateById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  '/seeker_profiles/{id}/experience_details':
+    get:
+      tags:
+        - seeker_profile
+      summary: Queries experience_details of seeker_profile.
+      operationId: seeker_profile.prototype.__get__experience_details
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/experience_detail'
+      deprecated: false
+    post:
+      tags:
+        - seeker_profile
+      summary: Creates a new instance in experience_details of this model.
+      operationId: seeker_profile.prototype.__create__experience_details
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/experience_detail'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/experience_detail'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Deletes all experience_details of this model.
+      operationId: seeker_profile.prototype.__delete__experience_details
+      parameters:
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/seeker_profiles/{id}/experience_details/count':
+    get:
+      tags:
+        - seeker_profile
+      summary: Counts experience_details of seeker_profile.
+      operationId: seeker_profile.prototype.__count__experience_details
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/seeker_profiles/{id}/education_details':
+    get:
+      tags:
+        - seeker_profile
+      summary: Queries education_details of seeker_profile.
+      operationId: seeker_profile.prototype.__get__education_details
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/education_detail'
+      deprecated: false
+    post:
+      tags:
+        - seeker_profile
+      summary: Creates a new instance in education_details of this model.
+      operationId: seeker_profile.prototype.__create__education_details
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/education_detail'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/education_detail'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Deletes all education_details of this model.
+      operationId: seeker_profile.prototype.__delete__education_details
+      parameters:
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/seeker_profiles/{id}/education_details/count':
+    get:
+      tags:
+        - seeker_profile
+      summary: Counts education_details of seeker_profile.
+      operationId: seeker_profile.prototype.__count__education_details
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/seeker_profiles/{id}/seeker_skill_sets':
+    get:
+      tags:
+        - seeker_profile
+      summary: Queries seeker_skill_sets of seeker_profile.
+      operationId: seeker_profile.prototype.__get__seeker_skill_sets
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    post:
+      tags:
+        - seeker_profile
+      summary: Creates a new instance in seeker_skill_sets of this model.
+      operationId: seeker_profile.prototype.__create__seeker_skill_sets
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - seeker_profile
+      summary: Deletes all seeker_skill_sets of this model.
+      operationId: seeker_profile.prototype.__delete__seeker_skill_sets
+      parameters:
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/seeker_profiles/{id}/seeker_skill_sets/count':
+    get:
+      tags:
+        - seeker_profile
+      summary: Counts seeker_skill_sets of seeker_profile.
+      operationId: seeker_profile.prototype.__count__seeker_skill_sets
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: seeker_profile id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
   /seeker_profiles:
     post:
       tags:
@@ -4483,6 +5140,346 @@ paths:
           in: query
           description: Criteria to match model instances
           required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/skill_sets/{id}/seeker_skill_sets/{fk}':
+    get:
+      tags:
+        - skill_set
+      summary: Find a related item by id for seeker_skill_sets.
+      operationId: skill_set.prototype.__findById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - skill_set
+      summary: Delete a related item by id for seeker_skill_sets.
+      operationId: skill_set.prototype.__destroyById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - skill_set
+      summary: Update a related item by id for seeker_skill_sets.
+      operationId: skill_set.prototype.__updateById__seeker_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for seeker_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+  '/skill_sets/{id}/job_post_skill_sets/{fk}':
+    get:
+      tags:
+        - skill_set
+      summary: Find a related item by id for job_post_skill_sets.
+      operationId: skill_set.prototype.__findById__job_post_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for job_post_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - skill_set
+      summary: Delete a related item by id for job_post_skill_sets.
+      operationId: skill_set.prototype.__destroyById__job_post_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for job_post_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - skill_set
+      summary: Update a related item by id for job_post_skill_sets.
+      operationId: skill_set.prototype.__updateById__job_post_skill_sets
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for job_post_skill_sets
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+  '/skill_sets/{id}/seeker_skill_sets':
+    get:
+      tags:
+        - skill_set
+      summary: Queries seeker_skill_sets of skill_set.
+      operationId: skill_set.prototype.__get__seeker_skill_sets
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    post:
+      tags:
+        - skill_set
+      summary: Creates a new instance in seeker_skill_sets of this model.
+      operationId: skill_set.prototype.__create__seeker_skill_sets
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/seeker_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - skill_set
+      summary: Deletes all seeker_skill_sets of this model.
+      operationId: skill_set.prototype.__delete__seeker_skill_sets
+      parameters:
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/skill_sets/{id}/seeker_skill_sets/count':
+    get:
+      tags:
+        - skill_set
+      summary: Counts seeker_skill_sets of skill_set.
+      operationId: skill_set.prototype.__count__seeker_skill_sets
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/skill_sets/{id}/job_post_skill_sets':
+    get:
+      tags:
+        - skill_set
+      summary: Queries job_post_skill_sets of skill_set.
+      operationId: skill_set.prototype.__get__job_post_skill_sets
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    post:
+      tags:
+        - skill_set
+      summary: Creates a new instance in job_post_skill_sets of this model.
+      operationId: skill_set.prototype.__create__job_post_skill_sets
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/job_post_skill_set'
+      deprecated: false
+    delete:
+      tags:
+        - skill_set
+      summary: Deletes all job_post_skill_sets of this model.
+      operationId: skill_set.prototype.__delete__job_post_skill_sets
+      parameters:
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/skill_sets/{id}/job_post_skill_sets/count':
+    get:
+      tags:
+        - skill_set
+      summary: Counts job_post_skill_sets of skill_set.
+      operationId: skill_set.prototype.__count__job_post_skill_sets
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: skill_set id
+          required: true
           type: string
           format: JSON
       responses:
@@ -6701,27 +7698,57 @@ definitions:
     additionalProperties: false
   seeker_profile:
     properties:
-      id:
+      seeker_profile_id:
         type: number
         format: double
+      first_name:
+        type: string
+      last_name:
+        type: string
+      current_salary:
+        type: number
+        format: double
+      is_annually_month:
+        type: boolean
+      currency:
+        type: string
       User_account_Id:
         type: string
+    required:
+      - seeker_profile_id
     additionalProperties: false
   job_post_activity:
     properties:
-      id:
+      job_post_activity_id:
+        type: number
+        format: double
+      apply_date:
         type: number
         format: double
       User_account_Id:
         type: string
+    required:
+      - job_post_activity_id
+      - apply_date
     additionalProperties: false
   job_post:
     properties:
-      id:
+      job_post_id:
         type: number
         format: double
+      is_company_name_hidden:
+        type: boolean
+      created_date:
+        type: string
+        format: date-time
+      job_description:
+        type: string
+      is_active:
+        type: boolean
       User_account_Id:
         type: string
+    required:
+      - job_post_id
     additionalProperties: false
   user_log:
     properties:
@@ -6773,50 +7800,141 @@ definitions:
       company_image_id:
         type: number
         format: double
+      company_id:
+        type: number
+        format: double
     required:
       - company_image_id
     additionalProperties: false
   education_detail:
     properties:
-      id:
+      Institute_university_name:
+        type: string
+      certificate_degree_name:
+        type: string
+      cgpa:
         type: number
         format: double
+      completion_date:
+        type: string
+        format: date-time
+      major:
+        type: string
+      percentage:
+        type: number
+        format: double
+      starting_date:
+        type: string
+        format: date-time
+      education_detail_id:
+        type: number
+        format: double
+      seeker_profile_id:
+        type: number
+        format: double
+    required:
+      - education_detail_id
     additionalProperties: false
   experience_detail:
     properties:
-      id:
+      company_name:
+        type: string
+      description:
+        type: string
+      end_date:
+        type: string
+        format: date-time
+      is_current_job:
+        type: boolean
+      job_location_city:
+        type: string
+      job_location_country:
+        type: string
+      job_location_state:
+        type: string
+      job_title:
+        type: string
+      start_date:
+        type: string
+        format: date-time
+      experience_detail_id:
         type: number
         format: double
+      seeker_profile_id:
+        type: number
+        format: double
+    required:
+      - experience_detail_id
     additionalProperties: false
   seeker_skill_set:
     properties:
-      id:
+      skill_level:
         type: number
         format: double
-    additionalProperties: false
-  skill_set:
-    properties:
-      id:
+      skill_set_id:
         type: number
         format: double
+      seeker_skill_set_id:
+        type: number
+        format: double
+      seeker_profile_id:
+        type: number
+        format: double
+    required:
+      - skill_set_id
+      - seeker_skill_set_id
     additionalProperties: false
   job_post_skill_set:
     properties:
-      id:
+      job_post_skill_set_id:
         type: number
         format: double
+      skill_level:
+        type: number
+        format: double
+      skill_set_id:
+        type: number
+        format: double
+    required:
+      - job_post_skill_set_id
+    additionalProperties: false
+  skill_set:
+    properties:
+      skill_set_id:
+        type: number
+        format: double
+      skill_set_name:
+        type: string
+    required:
+      - skill_set_id
     additionalProperties: false
   job_type:
     properties:
-      id:
+      job_type_id:
         type: number
         format: double
+      job_type:
+        type: string
+    required:
+      - job_type_id
     additionalProperties: false
   job_location:
     properties:
-      id:
+      job_location_id:
         type: number
         format: double
+      street_addrress:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      country:
+        type: string
+      zip:
+        type: string
+    required:
+      - job_location_id
     additionalProperties: false
 basePath: /api
 swagger: '2.0'

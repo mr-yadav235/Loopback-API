@@ -5,7 +5,50 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "end_date": {
+      "type": "date",
+      "required": false
+    },
+    "is_current_job": {
+      "type": "boolean",
+      "required": false
+    },
+    "job_location_city": {
+      "type": "string",
+      "required": false
+    },
+    "job_location_country": {
+      "type": "string",
+      "required": false
+    },
+    "job_location_state": {
+      "type": "string",
+      "required": false
+    },
+    "job_title": {
+      "type": "string",
+      "required": false
+    },
+    "start_date": {
+      "type": "date",
+      "required": false
+    },
+    "experience_detail_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

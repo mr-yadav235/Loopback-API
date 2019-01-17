@@ -5,9 +5,26 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "job_type_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "job_type": {
+      "type": "string",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "job_posts": {
+      "type": "hasMany",
+      "model": "job_post",
+      "foreignKey": "job_type_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

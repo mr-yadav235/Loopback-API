@@ -5,9 +5,31 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "skill_set_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "skill_set_name": {
+      "type": "string",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "seeker_skill_sets": {
+      "type": "hasMany",
+      "model": "seeker_skill_set",
+      "foreignKey": "skill_set_id"
+    },
+    "job_post_skill_sets": {
+      "type": "hasMany",
+      "model": "job_post_skill_set",
+      "foreignKey": "skill_set_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -5,9 +5,43 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "job_post_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "is_company_name_hidden": {
+      "type": "boolean",
+      "required": false
+    },
+    "created_date": {
+      "type": "date",
+      "required": false
+    },
+    "job_description": {
+      "type": "string",
+      "required": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "job_post_activities": {
+      "type": "hasMany",
+      "model": "job_post_activity",
+      "foreignKey": "job_post_id"
+    },
+    "job_post_skill_sets": {
+      "type": "hasMany",
+      "model": "job_post_skill_set",
+      "foreignKey": "job_post_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -5,7 +5,18 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "job_post_skill_set_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "skill_level": {
+      "type": "number",
+      "required": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

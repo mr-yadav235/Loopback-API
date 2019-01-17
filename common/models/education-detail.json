@@ -5,7 +5,42 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "Institute_university_name": {
+      "type": "string",
+      "required": false
+    },
+    "certificate_degree_name": {
+      "type": "string",
+      "required": false
+    },
+    "cgpa": {
+      "type": "number",
+      "required": false
+    },
+    "completion_date": {
+      "type": "date",
+      "required": false
+    },
+    "major": {
+      "type": "string",
+      "required": false
+    },
+    "percentage": {
+      "type": "number",
+      "required": false
+    },
+    "starting_date": {
+      "type": "date",
+      "required": false
+    },
+    "education_detail_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

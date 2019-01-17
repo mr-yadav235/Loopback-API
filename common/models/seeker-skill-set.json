@@ -5,7 +5,24 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "skill_level": {
+      "type": "number",
+      "required": false
+    },
+    "skill_set_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "seeker_skill_set_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

@@ -5,9 +5,52 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "seeker_profile_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "first_name": {
+      "type": "string",
+      "required": false
+    },
+    "last_name": {
+      "type": "string",
+      "required": false
+    },
+    "current_salary": {
+      "type": "number",
+      "required": false
+    },
+    "is_annually_month": {
+      "type": "boolean",
+      "required": false
+    },
+    "currency": {
+      "type": "string",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "experience_details": {
+      "type": "hasMany",
+      "model": "experience_detail",
+      "foreignKey": "seeker_profile_id"
+    },
+    "education_details": {
+      "type": "hasMany",
+      "model": "education_detail",
+      "foreignKey": "seeker_profile_id"
+    },
+    "seeker_skill_sets": {
+      "type": "hasMany",
+      "model": "seeker_skill_set",
+      "foreignKey": "seeker_profile_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

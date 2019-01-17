@@ -5,9 +5,42 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "job_location_id": {
+      "type": "number",
+      "id": true,
+      "required": true,
+      "isArray": false
+    },
+    "street_addrress": {
+      "type": "string",
+      "required": false
+    },
+    "city": {
+      "type": "string",
+      "required": false
+    },
+    "state": {
+      "type": "string",
+      "required": false
+    },
+    "country": {
+      "type": "string",
+      "required": false
+    },
+    "zip": {
+      "type": "string",
+      "required": false
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "job_posts": {
+      "type": "hasMany",
+      "model": "job_post",
+      "foreignKey": "job_location_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }
