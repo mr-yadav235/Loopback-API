@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "gravitee-apim.fullname" . }}-proxy-headers
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "gravitee-apim.labels" . | nindent 4 }}
+data:
+  X-Forwarded-Proto: "https"
