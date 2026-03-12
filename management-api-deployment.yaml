@@ -1,0 +1,277 @@
+{{- if .Values.api.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gravitee-apim.fullname" . }}-{{ .Values.api.name }}
+  labels:
+    {{- include "gravitee-apim.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.api.name }}
+    app.kubernetes.io/component: management-api
+spec:
+  replicas: {{ .Values.api.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.api.name }}
+      app.kubernetes.io/component: management-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.api.name }}
+        app.kubernetes.io/component: management-api
+    spec:
+      serviceAccountName: {{ include "gravitee-apim.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      initContainers:
+        - name: download-jdbc-driver
+          image: "{{ .Values.global.image.registry }}/{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Values.global.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              curl -kfSL -o /jdbc-ext/mysql-connector-java.jar "$(DRIVER_URL)" || wget --no-check-certificate -O /jdbc-ext/mysql-connector-java.jar "$(DRIVER_URL)"
+              rm -f /mgmt-data/data/write.lock
+          env:
+            - name: DRIVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-driver-url
+          volumeMounts:
+            - name: jdbc-driver
+              mountPath: /jdbc-ext
+            - name: tmp
+              mountPath: /tmp
+            - name: mgmt-data
+              mountPath: /mgmt-data
+          resources:
+            {{- toYaml .Values.initContainers.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+
+      containers:
+        - name: {{ .Values.api.name }}
+          image: "{{ .Values.global.image.registry }}/{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Values.global.image.tag }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.api.service.internalPort }}
+              protocol: TCP
+          env:
+            # --- Repository Type ---
+            - name: gravitee_management_type
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: management-type
+            - name: gravitee_ratelimit_type
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: ratelimit-type
+
+            # --- Management JDBC Connection ---
+            - name: gravitee_management_jdbc_url
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-url
+            - name: gravitee_management_jdbc_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-username
+            - name: gravitee_management_jdbc_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-password
+            - name: gravitee_management_jdbc_schema
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-schema
+            - name: gravitee_management_jdbc_liquibase
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-liquibase
+            # --- Management JDBC Pool ---
+            - name: gravitee_management_jdbc_pool_autoCommit
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-auto-commit
+            - name: gravitee_management_jdbc_pool_connectionTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-connection-timeout
+            - name: gravitee_management_jdbc_pool_idleTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-idle-timeout
+            - name: gravitee_management_jdbc_pool_maxLifetime
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-max-lifetime
+            - name: gravitee_management_jdbc_pool_minIdle
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-min-idle
+            - name: gravitee_management_jdbc_pool_maxPoolSize
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-max-pool-size
+            - name: gravitee_management_jdbc_pool_registerMbeans
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-register-mbeans
+
+            # --- Ratelimit JDBC Connection (same DB) ---
+            - name: gravitee_ratelimit_jdbc_url
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-url
+            - name: gravitee_ratelimit_jdbc_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-username
+            - name: gravitee_ratelimit_jdbc_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-password
+
+            # --- Elasticsearch ---
+            {{- if .Values.es.enabled }}
+            - name: gravitee_reporters_elasticsearch_endpoints_0
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-endpoint
+            - name: gravitee_analytics_elasticsearch_endpoints_0
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-endpoint
+            - name: gravitee_reporters_elasticsearch_security_enabled
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-security-enabled
+            - name: gravitee_reporters_elasticsearch_ssl_verifyHostname
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-ssl-verify-hostname
+            {{- end }}
+
+            # --- Jetty: trust proxy headers (X-Forwarded-Proto, X-Forwarded-Host) ---
+            - name: gravitee_jetty_forwarded
+              value: "true"
+
+            # --- Internal/Technical API (health probes) ---
+            - name: gravitee_services_core_http_host
+              value: "0.0.0.0"
+            - name: gravitee_services_core_http_port
+              value: {{ .Values.api.service.technicalApiPort | quote }}
+            - name: gravitee_services_core_http_authentication_type
+              value: "none"
+
+            # --- Installation URLs (needed for first-time DB initialization) ---
+            - name: gravitee_installation_api_url
+              value: "https://{{ index .Values.api.ingress.management.hosts 0 }}/management"
+            - name: gravitee_installation_ui_url
+              value: "https://{{ index .Values.ui.ingress.hosts 0 }}/console-ui"
+            - name: gravitee_installation_standalone_portal_url
+              value: "https://{{ index .Values.portal.ingress.hosts 0 }}/portal-ui"
+
+            # --- Component-specific env vars ---
+            {{- range .Values.api.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+
+          resources:
+            {{- toYaml .Values.api.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+
+          volumeMounts:
+            - name: jdbc-driver
+              mountPath: /opt/graviteeio-management-api/plugins/ext/repository-jdbc
+            - name: tmp
+              mountPath: /tmp
+            - name: mgmt-data
+              mountPath: /opt/graviteeio-management-api/plugins/.work
+              subPath: plugins-work
+            - name: mgmt-data
+              mountPath: /opt/graviteeio-management-api/logs
+              subPath: logs
+            - name: mgmt-data
+              mountPath: /opt/graviteeio-management-api/work
+              subPath: work
+            - name: mgmt-data
+              mountPath: /opt/graviteeio-management-api/data
+              subPath: data
+            {{- if .Values.license.key }}
+            - name: license
+              mountPath: /opt/graviteeio-management-api/license
+              readOnly: true
+            {{- end }}
+
+          startupProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.api.service.technicalApiPort }}
+            failureThreshold: 30
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.api.service.technicalApiPort }}
+            periodSeconds: 30
+            timeoutSeconds: 5
+
+          readinessProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.api.service.technicalApiPort }}
+            periodSeconds: 10
+            timeoutSeconds: 3
+
+      volumes:
+        - name: jdbc-driver
+          emptyDir:
+            sizeLimit: 10M
+        - name: tmp
+          emptyDir:
+            sizeLimit: 40M
+        - name: mgmt-data
+          persistentVolumeClaim:
+            claimName: {{ include "gravitee-apim.fullname" . }}-mgmt-api-data
+        {{- if .Values.license.key }}
+        - name: license
+          secret:
+            secretName: {{ include "gravitee-apim.fullname" . }}-secrets
+            items:
+              - key: license.key
+                path: license.key
+        {{- end }}
+{{- end }}
