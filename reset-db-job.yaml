@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: reset-gravitee-db
+  namespace: sandbox
+spec:
+  ttlSecondsAfterFinished: 120
+  template:
+    metadata:
+      labels:
+        app: reset-gravitee-db
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        supplementalGroups:
+          - 1001
+      containers:
+        - name: mysql-client
+          image: internal-cr.nomura.com/docker/mysql:8
+          command:
+            - sh
+            - -c
+            - |
+              echo "Dropping and recreating database..."
+              mysql -h api-gateway-poc.nomura.com -u api_gateway_admin -pmLAmUAB_3L -e "DROP DATABASE IF EXISTS api_gateway_poc; CREATE DATABASE api_gateway_poc;"
+              echo "Database fully reset - clean slate"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 10M
+      restartPolicy: Never
+  backoffLimit: 1
