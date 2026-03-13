@@ -76,7 +76,7 @@ spec:
           - 1001
       containers:
         - name: keycloak
-          image: internal-cr.nomura.com/docker/keycloak/keycloak:25.0
+          image: internal-cr.nomura.com/gcr/s2-infra/s2images/s2-keycloak:26.2.0.sel3
           imagePullPolicy: Always
           args: ["start-dev"]
           ports:
@@ -117,6 +117,7 @@ spec:
               cpu: "500m"
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
           volumeMounts:
             - name: tmp
               mountPath: /tmp
@@ -124,11 +125,15 @@ spec:
               mountPath: /opt/keycloak/data
             - name: kc-conf
               mountPath: /opt/keycloak/conf
+            - name: kc-quarkus
+              mountPath: /opt/keycloak/lib/quarkus
+            - name: kc-providers
+              mountPath: /opt/keycloak/providers
           startupProbe:
             httpGet:
               path: /auth/health/ready
               port: http
-            failureThreshold: 30
+            failureThreshold: 60
             periodSeconds: 10
           livenessProbe:
             httpGet:
@@ -145,13 +150,19 @@ spec:
       volumes:
         - name: tmp
           emptyDir:
-            sizeLimit: 100Mi
+            sizeLimit: 50M
         - name: kc-data
           persistentVolumeClaim:
             claimName: keycloak-data
         - name: kc-conf
           emptyDir:
-            sizeLimit: 50Mi
+            sizeLimit: 50M
+        - name: kc-quarkus
+          emptyDir:
+            sizeLimit: 50M
+        - name: kc-providers
+          emptyDir:
+            sizeLimit: 50M
 
 ---
 apiVersion: networking.k8s.io/v1
