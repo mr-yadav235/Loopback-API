@@ -74,6 +74,24 @@ spec:
         fsGroup: 1001
         supplementalGroups:
           - 1001
+      initContainers:
+        - name: copy-quarkus-libs
+          image: internal-cr.nomura.com/gcr/s2-infra/s2images/s2-keycloak:26.2.0.sel3
+          imagePullPolicy: Always
+          command: ["sh", "-c", "cp -a /opt/keycloak/lib/quarkus/* /quarkus-copy/"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: kc-quarkus
+              mountPath: /quarkus-copy
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
       containers:
         - name: keycloak
           image: internal-cr.nomura.com/gcr/s2-infra/s2images/s2-keycloak:26.2.0.sel3
