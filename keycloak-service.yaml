@@ -1,0 +1,20 @@
+{{- if .Values.keycloak.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gravitee-apim.fullname" . }}-{{ .Values.keycloak.name }}
+  labels:
+    {{- include "gravitee-apim.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.keycloak.name }}
+    app.kubernetes.io/component: keycloak
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.keycloak.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ .Values.keycloak.name }}
+    app.kubernetes.io/component: keycloak
+{{- end }}

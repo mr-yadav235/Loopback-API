@@ -1,0 +1,31 @@
+{{- if and .Values.keycloak.enabled .Values.keycloak.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "gravitee-apim.fullname" . }}-{{ .Values.keycloak.name }}
+  labels:
+    {{- include "gravitee-apim.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.keycloak.name }}
+    app.kubernetes.io/component: keycloak
+  annotations:
+    {{- toYaml .Values.keycloak.ingress.annotations | nindent 4 }}
+spec:
+  ingressClassName: {{ .Values.keycloak.ingress.ingressClassName }}
+  rules:
+    {{- range .Values.keycloak.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: {{ $.Values.keycloak.ingress.path }}
+            pathType: {{ $.Values.keycloak.ingress.pathType }}
+            backend:
+              service:
+                name: {{ include "gravitee-apim.fullname" $ }}-{{ $.Values.keycloak.name }}
+                port:
+                  number: {{ $.Values.keycloak.service.port }}
+    {{- end }}
+  {{- if .Values.keycloak.ingress.tls }}
+  tls:
+    {{- toYaml .Values.keycloak.ingress.tls | nindent 4 }}
+  {{- end }}
+{{- end }}
