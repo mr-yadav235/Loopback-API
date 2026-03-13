@@ -334,6 +334,84 @@ redis:
       cpu: "250m"
 
 # ---------------------------------------------------------------------------
+# KEYCLOAK (Identity Provider)
+# ---------------------------------------------------------------------------
+# Uses the same MySQL database as Gravitee (api_gateway_poc).
+# Keycloak auto-creates its own tables (prefixed with keycloak).
+#
+# After deploy, access Keycloak at: https://amn015287.nomura.com/auth
+# Admin console: https://amn015287.nomura.com/auth/admin
+keycloak:
+  enabled: true
+  name: keycloak
+
+  image:
+    repository: keycloak/keycloak
+    tag: "25.0"
+
+  admin:
+    username: admin
+    password: admin
+
+  db:
+    vendor: mysql
+    url: "jdbc:mysql://api-gateway-poc.nomura.com:3306/api_gateway_poc"
+
+  service:
+    port: 8080
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    pathType: Prefix
+    path: /auth
+    hosts:
+      - amn015287.nomura.com
+    tls:
+      - secretName: gravitee-tls
+        hosts:
+          - amn015287.nomura.com
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/allow-http: "false"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+
+  persistence:
+    size: 1Gi
+    storageClass: "local-path"
+
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+  # OIDC integration with Gravitee (Console + Portal)
+  # After deploying Keycloak, create:
+  #   1. Realm: "gravitee"
+  #   2. Client: "gravitee-console" (for Console UI SSO)
+  #      - Client authentication: ON
+  #      - Valid redirect URIs: https://amn015287.nomura.com/console-ui/*
+  #      - Web origins: https://amn015287.nomura.com
+  #   3. Client: "gravitee-portal" (for Developer Portal SSO)
+  #      - Client authentication: ON
+  #      - Valid redirect URIs: https://amn015287.nomura.com/portal-ui/*
+  #      - Web origins: https://amn015287.nomura.com
+  #   4. Update clientSecret values below with the generated secrets
+  oidc:
+    realm: gravitee
+    console:
+      clientId: gravitee-console
+      clientSecret: "CHANGE_ME"
+    portal:
+      clientId: gravitee-portal
+      clientSecret: "CHANGE_ME"
+
+# ---------------------------------------------------------------------------
 # ENTERPRISE LICENSE
 # ---------------------------------------------------------------------------
 # Create the Secret first:
