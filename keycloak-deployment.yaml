@@ -1,36 +1,87 @@
-{{- if .Values.keycloak.enabled }}
+# =============================================================================
+# Keycloak Standalone Deployment
+# =============================================================================
+# Deploy:   kubectl apply -f keycloak-standalone.yaml -n sandbox
+# Delete:   kubectl delete -f keycloak-standalone.yaml -n sandbox
+#
+# After deploy:
+#   Admin console: https://amn015287.nomura.com/auth/admin
+#   Login: admin / admin  (CHANGE the password after first login)
+#
+# Then configure Gravitee OIDC via Console UI:
+#   Organization Settings > Authentication > Add identity provider > OpenID Connect
+# =============================================================================
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: keycloak-data
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: "local-path"
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "gravitee-apim.fullname" . }}-{{ .Values.keycloak.name }}
+  name: keycloak
   labels:
-    {{- include "gravitee-apim.labels" . | nindent 4 }}
-    app.kubernetes.io/name: {{ .Values.keycloak.name }}
+    app.kubernetes.io/name: keycloak
     app.kubernetes.io/component: keycloak
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Values.keycloak.name }}
+      app.kubernetes.io/name: keycloak
       app.kubernetes.io/component: keycloak
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ .Values.keycloak.name }}
+        app.kubernetes.io/name: keycloak
         app.kubernetes.io/component: keycloak
     spec:
-      serviceAccountName: {{ include "gravitee-apim.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
-
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        supplementalGroups:
+          - 1001
       containers:
-        - name: {{ .Values.keycloak.name }}
-          image: "{{ .Values.global.image.registry }}/{{ .Values.keycloak.image.repository }}:{{ .Values.keycloak.image.tag }}"
-          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        - name: keycloak
+          image: internal-cr.nomura.com/docker/keycloak/keycloak:25.0
+          imagePullPolicy: Always
           args: ["start-dev"]
           ports:
             - name: http
-              containerPort: {{ .Values.keycloak.service.port }}
+              containerPort: 8080
               protocol: TCP
           env:
             - name: KC_HTTP_RELATIVE_PATH
@@ -41,28 +92,29 @@ spec:
               value: "true"
             - name: KC_HOSTNAME_STRICT
               value: "false"
+            # --- Database (same MySQL as Gravitee) ---
             - name: KC_DB
-              value: {{ .Values.keycloak.db.vendor | quote }}
+              value: "mysql"
             - name: KC_DB_URL
-              value: {{ .Values.keycloak.db.url | quote }}
+              value: "jdbc:mysql://api-gateway-poc.nomura.com:3306/api_gateway_poc"
             - name: KC_DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "gravitee-apim.fullname" . }}-secrets
-                  key: jdbc-username
+              value: "api_gateway_admin"
             - name: KC_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "gravitee-apim.fullname" . }}-secrets
-                  key: jdbc-password
+              value: "mLAmUAB_3L"
+            # --- Admin credentials ---
             - name: KEYCLOAK_ADMIN
-              value: {{ .Values.keycloak.admin.username | quote }}
+              value: "admin"
             - name: KEYCLOAK_ADMIN_PASSWORD
-              value: {{ .Values.keycloak.admin.password | quote }}
+              value: "admin"
             - name: KC_HEALTH_ENABLED
               value: "true"
           resources:
-            {{- toYaml .Values.keycloak.resources | nindent 12 }}
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
           securityContext:
             allowPrivilegeEscalation: false
           volumeMounts:
@@ -72,8 +124,6 @@ spec:
               mountPath: /opt/keycloak/data
             - name: kc-conf
               mountPath: /opt/keycloak/conf
-            - name: kc-cache
-              mountPath: /opt/keycloak/data/tmp
           startupProbe:
             httpGet:
               path: /auth/health/ready
@@ -92,18 +142,45 @@ spec:
               port: http
             periodSeconds: 10
             timeoutSeconds: 3
-
       volumes:
         - name: tmp
           emptyDir:
             sizeLimit: 100Mi
         - name: kc-data
           persistentVolumeClaim:
-            claimName: {{ include "gravitee-apim.fullname" . }}-keycloak-data
+            claimName: keycloak-data
         - name: kc-conf
           emptyDir:
             sizeLimit: 50Mi
-        - name: kc-cache
-          emptyDir:
-            sizeLimit: 100Mi
-{{- end }}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/allow-http: "false"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: amn015287.nomura.com
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - amn015287.nomura.com
+      secretName: gravitee-tls
