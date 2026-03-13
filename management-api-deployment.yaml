@@ -201,6 +201,59 @@ spec:
             - name: gravitee_installation_standalone_portal_url
               value: "https://{{ index .Values.portal.ingress.hosts 0 }}/portal-ui"
 
+            # --- API Documentation ---
+            - name: gravitee_documentation_fetchers_0_type
+              value: "http"
+            - name: gravitee_portal_apis_documentation_enabled
+              value: "true"
+
+            # --- Keycloak OIDC (Console SSO) ---
+            {{- if .Values.keycloak.enabled }}
+            {{- $kcHost := index .Values.keycloak.ingress.hosts 0 }}
+            {{- $kcRealm := .Values.keycloak.oidc.realm }}
+            {{- $kcBaseUrl := printf "https://%s/auth/realms/%s" $kcHost $kcRealm }}
+            - name: gravitee_security_providers_1_type
+              value: "oidc"
+            - name: gravitee_security_providers_1_id
+              value: "keycloak"
+            - name: gravitee_security_providers_1_clientId
+              value: {{ .Values.keycloak.oidc.console.clientId | quote }}
+            - name: gravitee_security_providers_1_clientSecret
+              value: {{ .Values.keycloak.oidc.console.clientSecret | quote }}
+            - name: gravitee_security_providers_1_tokenIntrospectionEndpoint
+              value: "{{ $kcBaseUrl }}/protocol/openid-connect/token/introspect"
+            - name: gravitee_security_providers_1_tokenEndpoint
+              value: "{{ $kcBaseUrl }}/protocol/openid-connect/token"
+            - name: gravitee_security_providers_1_authorizeEndpoint
+              value: "{{ $kcBaseUrl }}/protocol/openid-connect/auth"
+            - name: gravitee_security_providers_1_userInfoEndpoint
+              value: "{{ $kcBaseUrl }}/protocol/openid-connect/userinfo"
+            - name: gravitee_security_providers_1_logoutEndpoint
+              value: "{{ $kcBaseUrl }}/protocol/openid-connect/logout"
+            - name: gravitee_security_providers_1_userMapping_id
+              value: "sub"
+            - name: gravitee_security_providers_1_userMapping_email
+              value: "email"
+            - name: gravitee_security_providers_1_userMapping_lastname
+              value: "family_name"
+            - name: gravitee_security_providers_1_userMapping_firstname
+              value: "given_name"
+            - name: gravitee_security_providers_1_scopes_0
+              value: "openid"
+            - name: gravitee_security_providers_1_scopes_1
+              value: "profile"
+            - name: gravitee_security_providers_1_scopes_2
+              value: "email"
+            - name: gravitee_security_providers_1_color
+              value: "#0066ff"
+            - name: gravitee_security_providers_1_display
+              value: "Keycloak SSO"
+
+            # --- Keycloak OIDC (Portal SSO) ---
+            - name: gravitee_portal_authentication_oauth2_clientId
+              value: {{ .Values.keycloak.oidc.portal.clientId | quote }}
+            {{- end }}
+
             # --- Component-specific env vars ---
             {{- range .Values.api.env }}
             - name: {{ .name }}
@@ -229,7 +282,7 @@ spec:
             - name: mgmt-data
               mountPath: /opt/graviteeio-management-api/data
               subPath: data
-            {{- if .Values.license.key }}
+            {{- if .Values.license.enabled }}
             - name: license
               mountPath: /opt/graviteeio-management-api/license
               readOnly: true
@@ -266,10 +319,10 @@ spec:
         - name: mgmt-data
           persistentVolumeClaim:
             claimName: {{ include "gravitee-apim.fullname" . }}-mgmt-api-data
-        {{- if .Values.license.key }}
+        {{- if .Values.license.enabled }}
         - name: license
           secret:
-            secretName: {{ include "gravitee-apim.fullname" . }}-secrets
+            secretName: {{ .Values.license.secretName }}
             items:
               - key: license.key
                 path: license.key
