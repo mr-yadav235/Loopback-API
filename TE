@@ -1,0 +1,15 @@
+his error means the Management API can't initialize its JDBC repository. The most common causes are:
+
+1. Init container failed to download the MySQL driver -- Run:
+
+kubectl logs -n sandbox $(kubectl get pod -n sandbox -l app.kubernetes.io/component=management-api -o jsonpath='{.items[0].metadata.name}') -c download-jdbc-driver
+2. The driver JAR isn't in the right directory -- Run:
+
+kubectl exec -n sandbox $(kubectl get pod -n sandbox -l app.kubernetes.io/component=management-api -o jsonpath='{.items[0].metadata.name}') -c management-api -- ls -la /opt/graviteeio-management-api/plugins/ext/repository-jdbc/
+3. MySQL is unreachable -- Run:
+
+kubectl exec -n sandbox $(kubectl get pod -n sandbox -l app.kubernetes.io/component=management-api -o jsonpath='{.items[0].metadata.name}') -c management-api -- env | grep -i jdbc
+4. Full Management API logs -- Run:
+
+kubectl logs -n sandbox $(kubectl get pod -n sandbox -l app.kubernetes.io/component=management-api -o jsonpath='{.items[0].metadata.name}') -c management-api | grep -i "jdbc\|repository\|unable\|error" | head -30
+Can you run these and share the output? That will pinpoint the exact cause.
