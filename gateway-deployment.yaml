@@ -1,0 +1,255 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gravitee-apim.fullname" . }}-{{ .Values.gateway.name }}
+  labels:
+    {{- include "gravitee-apim.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.gateway.name }}
+    app.kubernetes.io/component: gateway
+spec:
+  replicas: {{ .Values.gateway.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.gateway.name }}
+      app.kubernetes.io/component: gateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.gateway.name }}
+        app.kubernetes.io/component: gateway
+    spec:
+      serviceAccountName: {{ include "gravitee-apim.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      initContainers:
+        - name: download-jdbc-driver
+          image: "{{ .Values.global.image.registry }}/{{ .Values.gateway.image.repository }}:{{ .Values.gateway.image.tag | default .Values.global.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              curl -kfSL -o /jdbc-ext/mysql-connector-java.jar "$(DRIVER_URL)" || wget --no-check-certificate -O /jdbc-ext/mysql-connector-java.jar "$(DRIVER_URL)"
+          env:
+            - name: DRIVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-driver-url
+          volumeMounts:
+            - name: jdbc-driver
+              mountPath: /jdbc-ext
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.initContainers.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+
+      containers:
+        - name: {{ .Values.gateway.name }}
+          image: "{{ .Values.global.image.registry }}/{{ .Values.gateway.image.repository }}:{{ .Values.gateway.image.tag | default .Values.global.image.tag }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.gateway.service.internalPort }}
+              protocol: TCP
+          env:
+            # --- Repository Type ---
+            - name: gravitee_management_type
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: management-type
+            - name: gravitee_ratelimit_type
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: ratelimit-type
+
+            # --- Management JDBC Connection ---
+            - name: gravitee_management_jdbc_url
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-url
+            - name: gravitee_management_jdbc_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-username
+            - name: gravitee_management_jdbc_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-password
+            - name: gravitee_management_jdbc_schema
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-schema
+            - name: gravitee_management_jdbc_liquibase
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-liquibase
+            # --- Management JDBC Pool ---
+            - name: gravitee_management_jdbc_pool_autoCommit
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-auto-commit
+            - name: gravitee_management_jdbc_pool_connectionTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-connection-timeout
+            - name: gravitee_management_jdbc_pool_idleTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-idle-timeout
+            - name: gravitee_management_jdbc_pool_maxLifetime
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-max-lifetime
+            - name: gravitee_management_jdbc_pool_minIdle
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-min-idle
+            - name: gravitee_management_jdbc_pool_maxPoolSize
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-max-pool-size
+            - name: gravitee_management_jdbc_pool_registerMbeans
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-pool-register-mbeans
+
+            # --- Ratelimit ---
+            {{- if eq .Values.ratelimit.type "redis" }}
+            - name: gravitee_ratelimit_redis_host
+              value: "{{ include "gravitee-apim.fullname" . }}-{{ .Values.redis.name }}"
+            - name: gravitee_ratelimit_redis_port
+              value: {{ .Values.redis.service.port | quote }}
+            {{- else }}
+            - name: gravitee_ratelimit_jdbc_url
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: jdbc-url
+            - name: gravitee_ratelimit_jdbc_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-username
+            - name: gravitee_ratelimit_jdbc_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-secrets
+                  key: jdbc-password
+            {{- end }}
+
+            # --- Elasticsearch ---
+            {{- if .Values.es.enabled }}
+            - name: gravitee_reporters_elasticsearch_endpoints_0
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-endpoint
+            - name: gravitee_reporters_elasticsearch_security_enabled
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-security-enabled
+            - name: gravitee_reporters_elasticsearch_ssl_verifyHostname
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "gravitee-apim.fullname" . }}-config
+                  key: es-ssl-verify-hostname
+            {{- end }}
+
+            # --- Internal/Technical API (health probes) ---
+            - name: gravitee_services_core_http_host
+              value: "0.0.0.0"
+            - name: gravitee_services_core_http_port
+              value: {{ .Values.gateway.service.technicalApiPort | quote }}
+            - name: gravitee_services_core_http_authentication_type
+              value: "none"
+
+          resources:
+            {{- toYaml .Values.gateway.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+
+          volumeMounts:
+            - name: jdbc-driver
+              mountPath: /opt/graviteeio-gateway/plugins/ext/repository-jdbc
+            - name: tmp
+              mountPath: /tmp
+            - name: gw-data
+              mountPath: /opt/graviteeio-gateway/plugins/.work
+              subPath: plugins-work
+            - name: gw-data
+              mountPath: /opt/graviteeio-gateway/logs
+              subPath: logs
+            - name: gw-data
+              mountPath: /opt/graviteeio-gateway/work
+              subPath: work
+            {{- if .Values.license.enabled }}
+            - name: license
+              mountPath: /opt/graviteeio-gateway/license
+              readOnly: true
+            {{- end }}
+
+          startupProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.gateway.service.technicalApiPort }}
+            failureThreshold: 30
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.gateway.service.technicalApiPort }}
+            periodSeconds: 30
+            timeoutSeconds: 5
+
+          readinessProbe:
+            httpGet:
+              path: /_node/health
+              port: {{ .Values.gateway.service.technicalApiPort }}
+            periodSeconds: 10
+            timeoutSeconds: 3
+
+      volumes:
+        - name: jdbc-driver
+          emptyDir:
+            sizeLimit: 10M
+        - name: tmp
+          emptyDir:
+            sizeLimit: 40M
+        - name: gw-data
+          persistentVolumeClaim:
+            claimName: {{ include "gravitee-apim.fullname" . }}-gateway-data
+        {{- if .Values.license.enabled }}
+        - name: license
+          secret:
+            secretName: {{ .Values.license.secretName }}
+            items:
+              - key: license.key
+                path: license.key
+        {{- end }}
+{{- end }}
